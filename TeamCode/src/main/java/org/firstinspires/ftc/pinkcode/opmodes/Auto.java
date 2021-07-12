@@ -8,6 +8,5 @@ import org.firstinspires.ftc.pinkcode.RobotAsync;
 public class Auto extends RobotAsync {
     @Override
     public void runOpMode() throws InterruptedException {
-
     }
 }
