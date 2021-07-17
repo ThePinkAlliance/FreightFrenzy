@@ -8,7 +8,7 @@ import org.firstinspires.ftc.pinkcode.utils.utils;
 
 public abstract class RobotAsync extends LinearOpMode {
     public utils Utils;
-    public roadrunner Roadrunner;
+    public roadrunner Roadrunner = new roadrunner(hardwareMap);
     public Base Base = new Base(hardwareMap);
 }
 

@@ -1,4 +1,4 @@
 package org.firstinspires.ftc.pinkcode.roadrunner.TrajectorySequence;
 
-public class EmptySequenceException {
+public class EmptySequenceException extends RuntimeException {
 }
