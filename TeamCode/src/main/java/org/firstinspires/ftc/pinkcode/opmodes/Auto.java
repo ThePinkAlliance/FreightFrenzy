@@ -15,15 +15,18 @@ public class Auto extends RobotAsync {
     }
 
     TrajectoryState trajectoryState = TrajectoryState.MOVE_TO_START;
+    Pose2d startPose = new Pose2d(0, 0, Math.toRadians(0));
 
     @Override
     public void runOpMode() throws InterruptedException {
+        this.Roadrunner.mecanumDrive.setPoseEstimate(startPose);
+
         Trajectory _move_to_start = this.Roadrunner.mecanumDrive.trajectoryBuilder(new Pose2d())
-                .splineTo(new Vector2d(20, 20), Math.toRadians(90))
+                .splineTo(new Vector2d(0, 20), Math.toRadians(0))
                 .build();
 
         Trajectory _finish = this.Roadrunner.mecanumDrive.trajectoryBuilder(_move_to_start.end())
-                .splineTo(new Vector2d(50, 0), Math.toRadians(180))
+                .splineTo(new Vector2d(0, 30), Math.toRadians(0))
                 .build();
 
         if (this.opModeIsActive()) {
