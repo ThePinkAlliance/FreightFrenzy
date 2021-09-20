@@ -1,0 +1,3 @@
+[submodule "pinktools"]
+	path = pinktools
+	url = https://github.com/devsamuelv/pinktools
