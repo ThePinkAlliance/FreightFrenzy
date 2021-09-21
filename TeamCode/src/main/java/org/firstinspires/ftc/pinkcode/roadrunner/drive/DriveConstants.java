@@ -62,6 +62,11 @@ public class DriveConstants {
         return WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / TICKS_PER_REV;
     }
 
+    // TODO: Do further investigation to see if this is correct
+    public static double inchesToTicks(double inches) {
+        return WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * inches * TICKS_PER_REV;
+    }
+
     public static double rpmToVelocity(double rpm) {
         return rpm * GEAR_RATIO * 2 * Math.PI * WHEEL_RADIUS / 60.0;
     }
