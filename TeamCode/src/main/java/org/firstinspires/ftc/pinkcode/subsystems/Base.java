@@ -10,6 +10,14 @@ public class Base extends HardwareMap {
         super(_map);
     }
 
+    public void configureBase(boolean auto) {
+        if (auto) {
+            this.configureMotorsPosition();
+        } else {
+            this.configureMotorsDefault();
+        }
+    }
+
     public void drive(double left_stick_x, double left_stick_y, double right_stick_x) {
         // r is the hypotenuse of (x,y) coordinate of left stick, robotAngle = angleTheta of (x,y) coordinate of left stick. rightX = turning speed
         double r = Math.hypot(left_stick_x, left_stick_y);
@@ -39,7 +47,7 @@ public class Base extends HardwareMap {
     public void driveRaw(double front_left, double front_right, double back_left, double back_right) {
         this.FL_Motor.setPower(front_left);
         this.FR_Motor.setPower(front_right);
-        this.BR_Motor.setPower(back_left);
+        this.BR_Motor.setPower(back_right);
         this.BL_Motor.setPower(back_left);
     }
 }

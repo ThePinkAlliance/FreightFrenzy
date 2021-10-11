@@ -9,10 +9,8 @@ import org.firstinspires.ftc.pinkcode.RobotAsync;
 public class CustomNav extends RobotAsync {
     @Override
     public void runOpMode() throws InterruptedException {
-        if (this.opModeIsActive()) {
-            Pose2d pose = new Pose2d(2, 2);
+        Pose2d pose = new Pose2d(2, 2);
 
-            this.Navigation.moveTo(pose);
-        }
+        this.Navigation.moveTo(pose);
     }
 }
