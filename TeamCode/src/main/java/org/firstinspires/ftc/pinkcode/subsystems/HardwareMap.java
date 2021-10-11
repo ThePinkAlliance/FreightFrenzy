@@ -2,15 +2,13 @@ package org.firstinspires.ftc.pinkcode.subsystems;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 
 public abstract class HardwareMap {
     protected DcMotor FL_Motor;
     protected DcMotor FR_Motor;
     protected DcMotor BL_Motor;
     protected DcMotor BR_Motor;
+    protected DcMotor Collector_Motor;
     public BNO055IMU imu;
 
     public HardwareMap(com.qualcomm.robotcore.hardware.HardwareMap _map) {
@@ -19,19 +17,34 @@ public abstract class HardwareMap {
         BL_Motor = _map.get(DcMotor.class, "bl-motor");
         BR_Motor = _map.get(DcMotor.class, "br-motor");
 
+        Collector_Motor = _map.get(DcMotor.class, "collect-motor");
+
         imu = _map.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
         imu.initialize(parameters);
 
-        FL_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FR_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BL_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BR_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        configureMotorsDefault();
 
         FL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    }
+
+    protected void configureMotorsDefault() {
+        FL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        Collector_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    protected void configureMotorsPosition() {
+        FL_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FR_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        BL_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        BR_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 }

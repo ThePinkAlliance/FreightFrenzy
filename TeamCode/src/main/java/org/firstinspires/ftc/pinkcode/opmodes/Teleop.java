@@ -8,10 +8,15 @@ import org.firstinspires.ftc.pinkcode.Robot;
 public class Teleop extends Robot {
     @Override
     public void init() {
+        this.Base.configureBase(false);
     }
 
     @Override
     public void loop() {
         this.Base.drive(gamepad1.left_stick_x, gamepad1.left_stick_y, gamepad1.right_stick_x);
+
+        if (gamepad1.a) {
+           this.Collector.toggleState();
+        }
     }
 }

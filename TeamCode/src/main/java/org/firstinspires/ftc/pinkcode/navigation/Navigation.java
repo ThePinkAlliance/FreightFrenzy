@@ -66,6 +66,8 @@ public class Navigation extends HardwareMap {
             }
         }
 
+        Cache.currentPosition = pose;
+
         return isPositionReached;
     }
 }
