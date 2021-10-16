@@ -4,6 +4,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 public abstract class HardwareMap {
+    protected DcMotor Spinner_Motor;
     protected DcMotor FL_Motor;
     protected DcMotor FR_Motor;
     protected DcMotor BL_Motor;
@@ -18,6 +19,8 @@ public abstract class HardwareMap {
         BR_Motor = _map.get(DcMotor.class, "br-motor");
 
         Collector_Motor = _map.get(DcMotor.class, "collect-motor");
+
+        Spinner_Motor = _map.get(DcMotor.class, "spinner-motor");
 
         imu = _map.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -37,7 +40,7 @@ public abstract class HardwareMap {
         FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
+        Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Collector_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
