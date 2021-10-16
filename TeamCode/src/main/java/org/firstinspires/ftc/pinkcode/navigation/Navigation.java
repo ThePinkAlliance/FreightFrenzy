@@ -7,11 +7,13 @@ import org.firstinspires.ftc.pinkcode.navigation.threads.ImuThread;
 import org.firstinspires.ftc.pinkcode.roadrunner.drive.DriveConstants;
 import org.firstinspires.ftc.pinkcode.subsystems.HardwareMap;
 
+/**
+ * IMU: is for travel verification
+ */
 public class Navigation extends HardwareMap {
-    private Thread imuThread;
+    private final Thread imuThread;
     private boolean isPositionReached = false;
     private boolean isHeadingReached = false;
-
 
     public Navigation(com.qualcomm.robotcore.hardware.HardwareMap _map) {
         super(_map);
@@ -44,7 +46,7 @@ public class Navigation extends HardwareMap {
             this.BR_Motor.setTargetPosition(-ticksToDegress);
         }
 
-        while (isHeadingReached) {
+        while (!isHeadingReached) {
             if (Cache.currentAngle.thirdAngle > (targetAngle - 0.2)) {
                 this.FL_Motor.setPower(0);
                 this.FR_Motor.setPower(0);
@@ -55,7 +57,7 @@ public class Navigation extends HardwareMap {
             }
         }
 
-        while (isPositionReached) {
+        while (!isPositionReached) {
             if (Cache.currentImuPosition.x > (targetPosition - 0.2)) {
                 this.FL_Motor.setPower(0);
                 this.FR_Motor.setPower(0);

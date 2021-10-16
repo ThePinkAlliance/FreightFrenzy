@@ -19,5 +19,9 @@ public class Teleop extends Robot {
         if (gamepad1.a) {
            this.Collector.toggleState();
         }
+
+        if (gamepad1.b) {
+            this.Collector.toggleGrabberState();
+        }
     }
 }

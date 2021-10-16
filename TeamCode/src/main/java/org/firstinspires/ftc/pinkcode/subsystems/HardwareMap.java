@@ -2,6 +2,7 @@ package org.firstinspires.ftc.pinkcode.subsystems;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public abstract class HardwareMap {
     protected DcMotor Spinner_Motor;
@@ -10,6 +11,9 @@ public abstract class HardwareMap {
     protected DcMotor BL_Motor;
     protected DcMotor BR_Motor;
     protected DcMotor Collector_Motor;
+
+    protected Servo Collector_Servo;
+
     public BNO055IMU imu;
 
     public HardwareMap(com.qualcomm.robotcore.hardware.HardwareMap _map) {
@@ -19,6 +23,7 @@ public abstract class HardwareMap {
         BR_Motor = _map.get(DcMotor.class, "br-motor");
 
         Collector_Motor = _map.get(DcMotor.class, "collect-motor");
+        Collector_Servo = _map.get(Servo.class, "collector-servo");
 
         Spinner_Motor = _map.get(DcMotor.class, "spinner-motor");
 
