@@ -38,6 +38,8 @@ public abstract class HardwareMap {
         FR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
     protected void configureMotorsDefault() {
@@ -45,7 +47,6 @@ public abstract class HardwareMap {
         FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Collector_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
