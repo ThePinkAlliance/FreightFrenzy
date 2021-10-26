@@ -3,6 +3,7 @@ package org.firstinspires.ftc.pinkcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.pinkcode.Robot;
+import org.firstinspires.ftc.pinkcode.subsystems.Collector;
 
 @TeleOp(name = "Teleop", group = "Teleop")
 public class Teleop extends Robot {
@@ -17,11 +18,14 @@ public class Teleop extends Robot {
         this.PizzaSpinner.spin(gamepad1.right_bumper);
 
         if (gamepad1.a) {
-           this.Collector.toggleState();
+        }
+
+        if (gamepad1.x) {
+            this.Collector.setState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorStates.BOTTOM);
         }
 
         if (gamepad1.b) {
-            this.Collector.toggleGrabberState();
+            this.Collector.setState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorStates.TOP);
         }
     }
 }

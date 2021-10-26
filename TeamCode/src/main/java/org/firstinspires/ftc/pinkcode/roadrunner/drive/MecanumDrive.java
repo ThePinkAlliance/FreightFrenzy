@@ -2,7 +2,7 @@ package org.firstinspires.ftc.pinkcode.roadrunner.drive;
 
 import androidx.annotation.NonNull;
 
-import com.acmerobotics.dashboard.config.Config;
+
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.drive.DriveSignal;
 import com.acmerobotics.roadrunner.followers.HolonomicPIDVAFollower;
@@ -29,7 +29,6 @@ import org.firstinspires.ftc.pinkcode.roadrunner.TrajectorySequence.TrajectorySe
 import org.firstinspires.ftc.pinkcode.roadrunner.TrajectorySequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.pinkcode.roadrunner.TrajectorySequence.TrajectorySequenceRunner;
 import org.firstinspires.ftc.pinkcode.roadrunner.util.LynxModuleUtil;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +43,7 @@ import static org.firstinspires.ftc.pinkcode.roadrunner.drive.DriveConstants.RUN
 import static org.firstinspires.ftc.pinkcode.roadrunner.drive.DriveConstants.TRACK_WIDTH;
 import static org.firstinspires.ftc.pinkcode.roadrunner.drive.DriveConstants.encoderTicksToInches;
 
-@Config
+
 public class MecanumDrive extends com.acmerobotics.roadrunner.drive.MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
     public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);

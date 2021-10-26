@@ -3,7 +3,7 @@ package org.firstinspires.ftc.pinkcode;
 public class Constants {
     // spinnerTargetRPM: 223
 
-
+    public static double Width = 10;
     public static double Ticks = 2048;
 
     public interface CollectorPositions {

@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.pinkcode.navigation;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.path.Path;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 
 import org.firstinspires.ftc.pinkcode.Constants;
 import org.firstinspires.ftc.pinkcode.navigation.threads.ImuThread;
 import org.firstinspires.ftc.pinkcode.roadrunner.drive.DriveConstants;
 import org.firstinspires.ftc.pinkcode.subsystems.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Const;
 
 /**
  * IMU: is for travel verification
@@ -23,6 +26,7 @@ public class Navigation extends HardwareMap {
     }
 
     // TODO: Make sure there is no measurement system mismatch
+    // TODO: this needs to be refactored and to add angle support
     public boolean moveTo(Pose2d pose) {
         double targetAngle = Math.toDegrees(Math.atan2(Cache.currentPosition.getX(), pose.getY()));
         double targetPosition = DriveConstants.inchesToTicks(pose.getX()) + this.FL_Motor.getCurrentPosition();
@@ -30,43 +34,15 @@ public class Navigation extends HardwareMap {
 
         // Convert motor tick's to degrees for the final heading at the end
         int ticksToDegress = (int) Math.round((Constants.Ticks / 360) * Math.toDegrees(targetAngle));
+        int rotTicks = (int) Math.round((Constants.Width * pose.getHeading() * Math.PI / 180) * Constants.Ticks);
 
         boolean isHeadingNegative = pose.getHeading() > 1;
 
         // Rotate the robot to the proper angle
-        if (isHeadingNegative) {
-            this.FL_Motor.setTargetPosition(-ticksToDegress);
-            this.FR_Motor.setTargetPosition(ticksToDegress);
-            this.BL_Motor.setTargetPosition(-ticksToDegress);
-            this.BR_Motor.setTargetPosition(ticksToDegress);
-        } else {
-            this.FL_Motor.setTargetPosition(ticksToDegress);
-            this.FR_Motor.setTargetPosition(-ticksToDegress);
-            this.BL_Motor.setTargetPosition(ticksToDegress);
-            this.BR_Motor.setTargetPosition(-ticksToDegress);
-        }
-
-        while (!isHeadingReached) {
-            if (Cache.currentAngle.thirdAngle > (targetAngle - 0.2)) {
-                this.FL_Motor.setPower(0);
-                this.FR_Motor.setPower(0);
-                this.BL_Motor.setPower(0);
-                this.BR_Motor.setPower(0);
-
-                this.isHeadingReached = true;
-            }
-        }
-
-        while (!isPositionReached) {
-            if (Cache.currentImuPosition.x > (targetPosition - 0.2)) {
-                this.FL_Motor.setPower(0);
-                this.FR_Motor.setPower(0);
-                this.BL_Motor.setPower(0);
-                this.BR_Motor.setPower(0);
-
-                this.isPositionReached = true;
-            }
-        }
+        this.FL_Motor.setTargetPosition(-rotTicks);
+        this.FR_Motor.setTargetPosition(rotTicks);
+        this.BL_Motor.setTargetPosition(-rotTicks);
+        this.BR_Motor.setTargetPosition(rotTicks);
 
         Cache.currentPosition = pose;
 
