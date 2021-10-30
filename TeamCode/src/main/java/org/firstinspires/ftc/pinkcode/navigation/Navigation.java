@@ -27,25 +27,33 @@ public class Navigation extends HardwareMap {
 
     // TODO: Make sure there is no measurement system mismatch
     // TODO: this needs to be refactored and to add angle support
-    public boolean moveTo(Pose2d pose) {
-        double targetAngle = Math.toDegrees(Math.atan2(Cache.currentPosition.getX(), pose.getY()));
-        double targetPosition = DriveConstants.inchesToTicks(pose.getX()) + this.FL_Motor.getCurrentPosition();
-        double endTargetAngle = Math.toDegrees(pose.getHeading() - targetAngle);
-
-        // Convert motor tick's to degrees for the final heading at the end
-        int ticksToDegress = (int) Math.round((Constants.Ticks / 360) * Math.toDegrees(targetAngle));
-        int rotTicks = (int) Math.round((Constants.Width * pose.getHeading() * Math.PI / 180) * Constants.Ticks);
-
-        boolean isHeadingNegative = pose.getHeading() > 1;
+    public int move(double inches) {
+        int position = (int) (FL_Motor.getCurrentPosition() + (inches * Constants.Ticks));
 
         // Rotate the robot to the proper angle
-        this.FL_Motor.setTargetPosition(-rotTicks);
-        this.FR_Motor.setTargetPosition(rotTicks);
-        this.BL_Motor.setTargetPosition(-rotTicks);
-        this.BR_Motor.setTargetPosition(rotTicks);
+        this.FL_Motor.setTargetPosition(position);
+        this.FR_Motor.setTargetPosition(position);
+        this.BL_Motor.setTargetPosition(position);
+        this.BR_Motor.setTargetPosition(position);
 
-        Cache.currentPosition = pose;
+        // this is to pause the code until the motors stop
+        while (FL_Motor.isBusy()) {}
 
-        return isPositionReached;
+        return position;
+    }
+
+    // the angle is in 180 degree format
+    public int rotate(double angle) {
+        int angleTicks = (int) ((Constants.Width * angle * Math.PI / 180) * Constants.Ticks) + FL_Motor.getCurrentPosition();
+
+        this.FL_Motor.setTargetPosition(-angleTicks);
+        this.FR_Motor.setTargetPosition(angleTicks);
+        this.BL_Motor.setTargetPosition(-angleTicks);
+        this.BR_Motor.setTargetPosition(angleTicks);
+
+        // this is to pause the code until the motors stop
+        while (FL_Motor.isBusy()) {}
+
+        return angleTicks;
     }
 }

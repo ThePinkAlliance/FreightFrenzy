@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.pinkcode.RobotAsync;
@@ -9,8 +8,9 @@ import org.firstinspires.ftc.pinkcode.RobotAsync;
 public class CustomNav extends RobotAsync {
     @Override
     public void runOpMode() throws InterruptedException {
-        Pose2d getOverBarrier = new Pose2d(0, 20, 10);
+        waitForStart();
 
-        this.Navigation.moveTo(getOverBarrier);
+        this.Navigation.move(36);
+        this.Navigation.rotate(50);
     }
 }

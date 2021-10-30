@@ -9,29 +9,32 @@ public class Collector extends HardwareMap {
         MIDDLE,
         TOP
     }
-    public enum CollectorGrabberStates {
+    public enum CollectorIntakeStates {
         OPEN,
         CLOSE
     }
     private CollectorStates currentState = CollectorStates.COLLECT;
-    private CollectorGrabberStates currentGrabberState = CollectorGrabberStates.OPEN;
+    private CollectorIntakeStates currentGrabberState = CollectorIntakeStates.OPEN;
 
     public Collector(com.qualcomm.robotcore.hardware.HardwareMap _map) {
         super(_map);
     }
 
+    // this will run thought the collector states
     public void toggleState() {
         CollectorStates state = nextState();
 
         setState(state);
     }
 
-    public void toggleGrabberState() {
-        CollectorGrabberStates state = nextGrabberState();
+    // this will run though the intake states
+    public void toggleIntakeState() {
+        CollectorIntakeStates state = nextGrabberState();
 
-        setGrabberState(state);
+        setIntakeState(state);
     }
 
+    // this will set the state of the arm
     public void setState(CollectorStates position) {
         this.currentState = position;
 
@@ -46,10 +49,24 @@ public class Collector extends HardwareMap {
         }
     }
 
-    public void setGrabberState(CollectorGrabberStates state) {
+    public void setAngle(double angle) {
+        int currentTicks = Collector_Motor.getCurrentPosition();
+        int angleTicks = (int) ((Constants.towerGearWidth * angle * Math.PI / 360) * Constants.Ticks) + currentTicks;
+
+        Collector_Motor.setTargetPosition(angleTicks);
+    }
+
+    public double getAngle() {
+        int currentTicks = Collector_Motor.getCurrentPosition();
+
+        return (Constants.Ticks / 360) * currentTicks;
+    }
+
+    // this will set the state of the collector
+    public void setIntakeState(CollectorIntakeStates state) {
         this.currentGrabberState = state;
 
-        if (state == CollectorGrabberStates.OPEN) {
+        if (state == CollectorIntakeStates.OPEN) {
             this.Collector_Servo.setPosition(Constants.CollectorGrabberPositions.OPEN);
         } else {
             this.Collector_Servo.setPosition(Constants.CollectorGrabberPositions.CLOSE);
@@ -60,15 +77,15 @@ public class Collector extends HardwareMap {
         return this.currentState;
     }
 
-    public CollectorGrabberStates getGrabberState() {
+    public CollectorIntakeStates getGrabberState() {
         return this.currentGrabberState;
     }
 
-    private CollectorGrabberStates nextGrabberState() {
-        if (currentGrabberState == CollectorGrabberStates.CLOSE) {
-            return CollectorGrabberStates.OPEN;
+    private CollectorIntakeStates nextGrabberState() {
+        if (currentGrabberState == CollectorIntakeStates.CLOSE) {
+            return CollectorIntakeStates.OPEN;
         } else {
-            return CollectorGrabberStates.CLOSE;
+            return CollectorIntakeStates.CLOSE;
         }
     }
 

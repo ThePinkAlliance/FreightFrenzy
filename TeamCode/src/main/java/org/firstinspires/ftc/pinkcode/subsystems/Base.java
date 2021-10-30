@@ -44,6 +44,13 @@ public class Base extends HardwareMap {
         this.BR_Motor.setPower(v2);
     }
 
+    public void tank(double left, double right) {
+        this.FL_Motor.setPower(left);
+        this.FR_Motor.setPower(right);
+        this.BR_Motor.setPower(right);
+        this.BL_Motor.setPower(left);
+    }
+
     public void driveRaw(double front_left, double front_right, double back_left, double back_right) {
         this.FL_Motor.setPower(front_left);
         this.FR_Motor.setPower(front_right);

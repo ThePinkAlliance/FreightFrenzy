@@ -1,10 +1,5 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
-
-import android.widget.Spinner;
-
-import org.firstinspires.ftc.pinkcode.Constants;
-
 public class PizzaSpinner extends HardwareMap {
 
     public PizzaSpinner(com.qualcomm.robotcore.hardware.HardwareMap _map) {
@@ -14,7 +9,7 @@ public class PizzaSpinner extends HardwareMap {
     public void spin(boolean right_bumper) {
         boolean RightBumper = right_bumper;
 
-        //If right bumper is held, boolean value is true and motor goes to 80% power
+        // If right bumper is held, boolean value is true and motor goes to 80% power
         if (right_bumper) {
            this.Spinner_Motor.setPower(0.8);
         } else {

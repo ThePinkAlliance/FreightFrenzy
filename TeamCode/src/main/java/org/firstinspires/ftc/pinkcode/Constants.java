@@ -3,6 +3,9 @@ package org.firstinspires.ftc.pinkcode;
 public class Constants {
     // spinnerTargetRPM: 223
 
+    public static double towerGearWidth = 1.10236;
+    public static double towerGearLength = 4.23;
+
     public static double Width = 10;
     public static double Ticks = 2048;
 
