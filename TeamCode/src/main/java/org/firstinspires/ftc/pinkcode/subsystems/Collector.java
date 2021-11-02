@@ -51,7 +51,7 @@ public class Collector extends HardwareMap {
 
     public void setAngle(double angle) {
         int currentTicks = Collector_Motor.getCurrentPosition();
-        int angleTicks = (int) ((Constants.towerGearWidth * angle * Math.PI / 360) * Constants.Ticks) + currentTicks;
+        int angleTicks = (int) ((Constants.towerGearWidth * angle * Math.PI / 360) * Constants.Ticks);
 
         Collector_Motor.setTargetPosition(angleTicks);
     }
