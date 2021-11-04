@@ -49,6 +49,7 @@ public class Collector extends HardwareMap {
         }
     }
 
+    // moves the motor to a point defined in degrees
     public void setAngle(double angle) {
         int currentTicks = Collector_Motor.getCurrentPosition();
         int angleTicks = (int) ((Constants.Ticks / 360) * angle);
@@ -56,6 +57,7 @@ public class Collector extends HardwareMap {
         Collector_Motor.setTargetPosition(angleTicks);
     }
 
+    // this will calculate the angle from the amount of ticks the motor has moved.
     public double getAngle() {
         int currentTicks = Collector_Motor.getCurrentPosition();
 
@@ -73,10 +75,12 @@ public class Collector extends HardwareMap {
         }
     }
 
+    // retrieves the current state of the collector
     public CollectorStates getState() {
         return this.currentState;
     }
 
+    // retrieves the current state of the intake
     public CollectorIntakeStates getGrabberState() {
         return this.currentGrabberState;
     }
