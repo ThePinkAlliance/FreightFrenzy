@@ -59,7 +59,7 @@ public class Collector extends HardwareMap {
     public double getAngle() {
         int currentTicks = Collector_Motor.getCurrentPosition();
 
-        return (Constants.Ticks / 360) * currentTicks;
+        return (currentTicks / Constants.Ticks) * 360;
     }
 
     // this will set the state of the collector

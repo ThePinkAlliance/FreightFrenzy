@@ -3,10 +3,14 @@ package org.firstinspires.ftc.pinkcode;
 public class Constants {
     // spinnerTargetRPM: 223
 
-    public static double towerGearWidth = 1.10236;
+    public static double towerGearWidth = 1.543307;
+    // inches
+    public static double towerGearCircumference = 4.85;
     public static double towerGearLength = 4.23;
 
     public static double Width = 10;
+
+    // this is for the amount of ticks per inch
     public static double Ticks = 2048;
 
     public interface CollectorPositions {
