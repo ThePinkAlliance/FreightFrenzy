@@ -4,6 +4,8 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+
 public abstract class HardwareMap {
     protected DcMotor Spinner_Motor;
     protected DcMotor FL_Motor;
@@ -11,6 +13,7 @@ public abstract class HardwareMap {
     protected DcMotor BL_Motor;
     protected DcMotor BR_Motor;
     protected DcMotor Collector_Motor;
+    protected WebcamName Webcam;
 
     protected Servo Collector_Servo;
 
@@ -39,6 +42,8 @@ public abstract class HardwareMap {
         BL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        Webcam = _map.get(WebcamName.class, "Webcam 1");
 
     }
 

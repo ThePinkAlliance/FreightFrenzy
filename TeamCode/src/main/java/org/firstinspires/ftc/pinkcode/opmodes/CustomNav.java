@@ -8,6 +8,8 @@ import org.firstinspires.ftc.pinkcode.RobotAsync;
 public class CustomNav extends RobotAsync {
     @Override
     public void runOpMode() throws InterruptedException {
+
+        // Wait for the game to begin
         waitForStart();
 
         this.Navigation.move(36);
