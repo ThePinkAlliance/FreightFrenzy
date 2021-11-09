@@ -18,6 +18,7 @@ public class Base extends HardwareMap {
         }
     }
 
+    // drive controls for mechanium drive
     public void drive(double left_stick_x, double left_stick_y, double right_stick_x) {
         // r is the hypotenuse of (x,y) coordinate of left stick, robotAngle = angleTheta of (x,y) coordinate of left stick. rightX = turning speed
         double r = Math.hypot(left_stick_x, left_stick_y);
@@ -44,11 +45,12 @@ public class Base extends HardwareMap {
         this.BR_Motor.setPower(v2);
     }
 
+    // drive controls for tank drive
     public void tank(double left, double right) {
-        this.FL_Motor.setPower(left);
+        this.FL_Motor.setPower(left * left);
         this.FR_Motor.setPower(right);
         this.BR_Motor.setPower(right);
-        this.BL_Motor.setPower(left);
+        this.BL_Motor.setPower(left * left);
     }
 
     public void driveRaw(double front_left, double front_right, double back_left, double back_right) {

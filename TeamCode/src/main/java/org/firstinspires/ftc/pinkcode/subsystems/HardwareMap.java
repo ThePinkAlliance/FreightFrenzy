@@ -2,11 +2,12 @@ package org.firstinspires.ftc.pinkcode.subsystems;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
-public abstract class HardwareMap {
+public class HardwareMap {
     protected DcMotor Spinner_Motor;
     protected DcMotor FL_Motor;
     protected DcMotor FR_Motor;
@@ -25,10 +26,10 @@ public abstract class HardwareMap {
         BL_Motor = _map.get(DcMotor.class, "bl-motor");
         BR_Motor = _map.get(DcMotor.class, "br-motor");
 
-        Collector_Motor = _map.get(DcMotor.class, "collect-motor");
-        Collector_Servo = _map.get(Servo.class, "collector-servo");
-
-        Spinner_Motor = _map.get(DcMotor.class, "spinner-motor");
+//        Collector_Motor = _map.get(DcMotor.class, "collect-motor");
+//        Collector_Servo = _map.get(Servo.class, "collector-servo");
+//
+//        Spinner_Motor = _map.get(DcMotor.class, "spinner-motor");
 
         imu = _map.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -37,11 +38,14 @@ public abstract class HardwareMap {
 
         configureMotorsDefault();
 
+        BL_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        BR_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         FL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         Webcam = _map.get(WebcamName.class, "Webcam 1");
 
@@ -52,7 +56,7 @@ public abstract class HardwareMap {
         FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        Collector_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+//        Collector_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     protected void configureMotorsPosition() {
