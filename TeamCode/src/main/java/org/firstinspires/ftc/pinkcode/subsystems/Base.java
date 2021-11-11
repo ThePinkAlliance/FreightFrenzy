@@ -2,6 +2,7 @@ package org.firstinspires.ftc.pinkcode.subsystems;
 
 /**
  * Motor Type; Gobilda
+ * Motor RPS: 5.33
  * Motor RPM: 320
  */
 
@@ -47,10 +48,10 @@ public class Base extends HardwareMap {
 
     // drive controls for tank drive
     public void tank(double left, double right) {
-        this.FL_Motor.setPower(left * left);
+        this.FL_Motor.setPower(left);
         this.FR_Motor.setPower(right);
         this.BR_Motor.setPower(right);
-        this.BL_Motor.setPower(left * left);
+        this.BL_Motor.setPower(left);
     }
 
     public void driveRaw(double front_left, double front_right, double back_left, double back_right) {

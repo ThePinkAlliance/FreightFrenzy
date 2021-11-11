@@ -14,7 +14,6 @@ public class HardwareMap {
     protected DcMotor BL_Motor;
     protected DcMotor BR_Motor;
     protected DcMotor Collector_Motor;
-    protected WebcamName Webcam;
 
     protected Servo Collector_Servo;
 
@@ -26,14 +25,14 @@ public class HardwareMap {
         BL_Motor = _map.get(DcMotor.class, "bl-motor");
         BR_Motor = _map.get(DcMotor.class, "br-motor");
 
-//        Collector_Motor = _map.get(DcMotor.class, "collect-motor");
+        Collector_Motor = _map.get(DcMotor.class, "collect-motor");
 //        Collector_Servo = _map.get(Servo.class, "collector-servo");
-//
-//        Spinner_Motor = _map.get(DcMotor.class, "spinner-motor");
+
+        Spinner_Motor = _map.get(DcMotor.class, "spinner-motor");
 
         imu = _map.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         imu.initialize(parameters);
 
         configureMotorsDefault();
@@ -45,10 +44,9 @@ public class HardwareMap {
         FR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-//        Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        Webcam = _map.get(WebcamName.class, "Webcam 1");
-
+//        Webcam = _map.get(WebcamName.class, "Webcam 1");
     }
 
     protected void configureMotorsDefault() {
@@ -56,13 +54,13 @@ public class HardwareMap {
         FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        Collector_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        Collector_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     protected void configureMotorsPosition() {
-        FL_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        FR_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BL_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        BR_Motor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        FL_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        FR_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        BL_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        BR_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }
