@@ -89,7 +89,7 @@ public class Navigation extends HardwareMap {
 
     // Tank drive two wheels to target positions in inches.
     // Returns true when both arrive at the target.
-    public static boolean driveToPos (double targetPosInches, double targetAngleDeg, double currentBasePosCounts, double currentAngleDeg,
+    public boolean driveToPos (double targetPosInches, double targetAngleDeg, double currentBasePosCounts, double currentAngleDeg,
                                       double linearSpeedCounts, double maxPower)
     {
         double angleErrorDegrees = targetAngleDeg - currentAngleDeg;
@@ -123,6 +123,11 @@ public class Navigation extends HardwareMap {
         }
         leftBMotorCmd = leftFMotorCmd;
         rightBMotorCmd = rightFMotorCmd;
+
+        this.FL_Motor.setPower(leftFMotorCmd);
+        this.BL_Motor.setPower(leftBMotorCmd);
+        this.FL_Motor.setPower(rightFMotorCmd);
+        this.FL_Motor.setPower(rightBMotorCmd);
 
         // True if navigated to position
         return (Math.abs(linearError) < POSITION_THRESHOLD) && (Math.abs(angleErrorDegrees) < ANGLE_THRESHOLD);
