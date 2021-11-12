@@ -31,6 +31,10 @@ public class Collector extends HardwareMap {
         setState(state);
     }
 
+    public void drive(double power) {
+        this.Collector_Motor.setPower(power);
+    }
+
     // this will run though the intake states
     public void toggleIntakeState() {
         CollectorIntakeStates state = nextIntakeState();

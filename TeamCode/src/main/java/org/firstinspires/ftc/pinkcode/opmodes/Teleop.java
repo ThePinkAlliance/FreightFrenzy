@@ -29,30 +29,22 @@ public class Teleop extends OpMode {
 
         // when right bumper is pressed activate pizza spinner
         this.PizzaSpinner.spin(gamepad1.right_bumper);
+        this.Collector.drive(gamepad2.left_stick_y);
 
         // send data to the dashboard about robot info
 //        this.Dashboard.sendData("Collector Angle", this.Collector.getAngle());
 //        this.Dashboard.sendData("Collector State", this.Collector.getState().toString());
 //        this.Dashboard.sendData("Collector Intake State", this.Collector.getIntakeState().toString());
 
+        if (gamepad2.a) {
+            this.Collector.setIntakeState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorIntakeStates.RUN);
+        } else {
+            this.Collector.setIntakeState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorIntakeStates.HALT);
+        }
+
         // when button x is pressed move collector to bottom position
         if (gamepad2.x) {
-            this.Collector.setState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorStates.BOTTOM);
-        }
-
-        // when button y is pressed move collector to bottom position
-        if (gamepad2.y) {
-            this.Collector.setState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorStates.MIDDLE);
-        }
-
-        // when button a is pressed move collector to bottom position
-        if (gamepad2.a) {
-            this.Collector.setState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorStates.COLLECT);
-        }
-
-        // when button b is pressed move collector to bottom position
-        if (gamepad2.b) {
-            this.Collector.setState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorStates.TOP);
+//            this.Collector.setState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorStates.BOTTOM);
         }
 
         telemetry.update();

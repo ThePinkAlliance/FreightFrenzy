@@ -25,7 +25,7 @@ public class HardwareMap {
         BL_Motor = _map.get(DcMotor.class, "bl-motor");
         BR_Motor = _map.get(DcMotor.class, "br-motor");
 
-        Collector_Motor = _map.get(DcMotor.class, "collect-motor");
+//        Collector_Motor = _map.get(DcMotor.class, "collect-motor");
 //        Collector_Servo = _map.get(Servo.class, "collector-servo");
 
         Spinner_Motor = _map.get(DcMotor.class, "spinner-motor");
@@ -38,7 +38,7 @@ public class HardwareMap {
         configureMotorsDefault();
 
         BL_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
-        BR_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
+        FL_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         FL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -54,7 +54,7 @@ public class HardwareMap {
         FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        Collector_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+//        Collector_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     protected void configureMotorsPosition() {
