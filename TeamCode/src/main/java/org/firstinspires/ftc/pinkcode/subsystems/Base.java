@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
+import org.firstinspires.ftc.pinkcode.Constants;
+
 /**
  * Motor Type; Gobilda
  * Motor RPS: 5.33
@@ -17,6 +19,13 @@ public class Base extends HardwareMap {
         } else {
             this.configureMotorsDefault();
         }
+    }
+
+    public double getBasePosCounts(){
+        return this.BL_Motor.getCurrentPosition() / Constants.Ticks;
+    }
+    public double getBasePos(){
+        return this.BL_Motor.getCurrentPosition();
     }
 
     // drive controls for mechanium drive

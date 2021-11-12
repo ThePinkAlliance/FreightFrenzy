@@ -1,20 +1,20 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
-import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.pinkcode.Constants;
 import org.firstinspires.ftc.pinkcode.navigation.Navigation;
 import org.firstinspires.ftc.pinkcode.subsystems.Base;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 
 @Autonomous(name = "Auto Custom Nav", group = "auto")
-public class CustomNav extends LinearOpMode {
+public class CustomNav_Park_Left extends LinearOpMode {
     Base Base;
     Navigation Navigation;
+
+    /*
+        Park in warehouse from left start position
+     */
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -27,9 +27,12 @@ public class CustomNav extends LinearOpMode {
         // Wait for the game to begin
         waitForStart();
 
-        //Note that we be using DRIVE_SPEED
-        this.Navigation.driveToPos(6, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(),
-                Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+        //move forwards away from wall
+        this.Navigation.driveToPos(19, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+        //turn right
         this.Navigation.driveToPos(6, 90, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+        //go forwards until past barrier
+        this.Navigation.driveToPos(80, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+
     }
 }
