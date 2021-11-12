@@ -16,6 +16,13 @@ public class CustomNav extends LinearOpMode {
     Base Base;
     Navigation Navigation;
 
+    enum states {
+        PARKED,
+        MOVE_TO_BARCODE,
+    }
+
+    states currentState = states.PARKED;
+
     @Override
     public void runOpMode() throws InterruptedException {
         this.Base = new Base(hardwareMap);
@@ -27,9 +34,25 @@ public class CustomNav extends LinearOpMode {
         // Wait for the game to begin
         waitForStart();
 
-        //Note that we be using DRIVE_SPEED
-        this.Navigation.driveToPos(6, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(),
-                Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
-        this.Navigation.driveToPos(6, 90, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+        while (opModeIsActive()) {
+            // Note that we be using DRIVE_SPEED
+            switch (currentState) {
+                case PARKED:
+                    boolean reachedDest = this.Navigation.driveToPos(6, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(),
+                            Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+
+                    if (reachedDest) {
+                        currentState = states.MOVE_TO_BARCODE;
+                    }
+
+                    break;
+
+                case MOVE_TO_BARCODE:
+                    this.Navigation.driveToPos(6, 90, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+                    break;
+            }
+        }
+
+
     }
 }
