@@ -21,9 +21,22 @@ public class Base extends HardwareMap {
         }
     }
 
+    public double getDriveDiff() {
+        double bl = this.BL_Motor.getCurrentPosition();
+        double fl = this.FL_Motor.getCurrentPosition();
+
+        double fr = this.FR_Motor.getCurrentPosition();
+        double br = this.BR_Motor.getCurrentPosition();
+
+        double l = fl / fr;
+
+        return l * fr;
+    }
+
     public double getBasePosCounts(){
         return this.BL_Motor.getCurrentPosition() / Constants.Ticks;
     }
+
     public double getBasePos(){
         return this.BL_Motor.getCurrentPosition();
     }

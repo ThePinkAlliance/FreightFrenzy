@@ -8,7 +8,7 @@ import org.firstinspires.ftc.pinkcode.navigation.Navigation;
 import org.firstinspires.ftc.pinkcode.subsystems.Base;
 import org.firstinspires.ftc.pinkcode.subsystems.PizzaSpinner;
 
-@Autonomous(name = "Auto Custom Nav", group = "auto")
+@Autonomous(name = "Auto Custom Nav Spin Right", group = "auto")
 public class CustomNav_SpinParkRight extends LinearOpMode {
     Base Base;
     PizzaSpinner PizzaSpinner;

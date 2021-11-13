@@ -43,9 +43,9 @@ public class Teleop extends OpMode {
         }
 
         // when button x is pressed move collector to bottom position
-        if (gamepad2.x) {
+//        if (gamepad2.x) {
 //            this.Collector.setState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorStates.BOTTOM);
-        }
+//        }
 
         telemetry.update();
     }

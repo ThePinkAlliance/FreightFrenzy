@@ -7,7 +7,7 @@ import org.firstinspires.ftc.pinkcode.Constants;
 import org.firstinspires.ftc.pinkcode.navigation.Navigation;
 import org.firstinspires.ftc.pinkcode.subsystems.Base;
 
-@Autonomous(name = "Auto Custom Nav", group = "auto")
+@Autonomous(name = "Auto Custom Nav Left", group = "auto")
 public class CustomNav_Park_Left extends LinearOpMode {
     Base Base;
     Navigation Navigation;

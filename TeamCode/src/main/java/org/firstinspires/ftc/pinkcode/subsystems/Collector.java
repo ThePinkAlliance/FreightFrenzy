@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 import org.firstinspires.ftc.pinkcode.Constants;
 
 public class Collector extends HardwareMap {
@@ -32,10 +34,11 @@ public class Collector extends HardwareMap {
     }
 
     public void drive(double power) {
-        this.Collector_Motor.setPower(power);
+        this.Collector_Motor_L.setPower(power);
+        this.Collector_Motor_R.setPower(power);
     }
 
-    // this will run though the intake states
+    // this will run though the inta ke states
     public void toggleIntakeState() {
         CollectorIntakeStates state = nextIntakeState();
 
@@ -47,13 +50,17 @@ public class Collector extends HardwareMap {
         this.currentState = position;
 
         if (position == CollectorStates.COLLECT) {
-            this.Collector_Motor.setTargetPosition(Constants.CollectorPositions.COLLECT);
+            this.Collector_Motor_L.setTargetPosition(Constants.CollectorPositions.COLLECT);
+            this.Collector_Motor_R.setTargetPosition(Constants.CollectorPositions.COLLECT);
         } else if (position == CollectorStates.BOTTOM) {
-            this.Collector_Motor.setTargetPosition(Constants.CollectorPositions.BOTTOM);
+            this.Collector_Motor_L.setTargetPosition(Constants.CollectorPositions.BOTTOM);
+            this.Collector_Motor_R.setTargetPosition(Constants.CollectorPositions.BOTTOM);
         } else if (position == CollectorStates.MIDDLE) {
-            this.Collector_Motor.setTargetPosition(Constants.CollectorPositions.MIDDLE);
+            this.Collector_Motor_L.setTargetPosition(Constants.CollectorPositions.MIDDLE);
+            this.Collector_Motor_R.setTargetPosition(Constants.CollectorPositions.MIDDLE);
         } else if (position == CollectorStates.TOP) {
-            this.Collector_Motor.setTargetPosition(Constants.CollectorPositions.TOP);
+            this.Collector_Motor_L.setTargetPosition(Constants.CollectorPositions.TOP);
+            this.Collector_Motor_R.setTargetPosition(Constants.CollectorPositions.TOP);
         }
     }
 
@@ -61,12 +68,13 @@ public class Collector extends HardwareMap {
     public void setAngle(double angle) {
         int angleTicks = (int) ((Constants.Ticks / 360) * angle);
 
-        Collector_Motor.setTargetPosition(angleTicks);
+        Collector_Motor_L.setTargetPosition(angleTicks);
+        Collector_Motor_R.setTargetPosition(angleTicks);
     }
 
     // this will calculate the angle from the amount of ticks the motor has moved.
-    public double getAngle() {
-        int currentTicks = Collector_Motor.getCurrentPosition();
+    public double getAngle(DcMotor _motor) {
+        int currentTicks = _motor.getCurrentPosition();
 
         return ((currentTicks / Constants.Ticks) * 360);
     }
@@ -76,9 +84,9 @@ public class Collector extends HardwareMap {
         this.currentIntakeState = state;
 
         if (state == CollectorIntakeStates.RUN) {
-            this.Collector_Servo.setPosition(Constants.CollectorGrabberPositions.OPEN);
+            this.Collector_Intake_Motor.setTargetPosition(Constants.CollectorGrabberPositions.OPEN);
         } else {
-            this.Collector_Servo.setPosition(Constants.CollectorGrabberPositions.CLOSE);
+            this.Collector_Intake_Motor.setTargetPosition(Constants.CollectorGrabberPositions.CLOSE);
         }
     }
 

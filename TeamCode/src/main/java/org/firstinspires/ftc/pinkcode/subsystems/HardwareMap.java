@@ -13,9 +13,10 @@ public class HardwareMap {
     protected DcMotor FR_Motor;
     protected DcMotor BL_Motor;
     protected DcMotor BR_Motor;
-    protected DcMotor Collector_Motor;
+    protected DcMotor Collector_Motor_L;
+    protected DcMotor Collector_Motor_R;
 
-    protected Servo Collector_Servo;
+    protected DcMotor Collector_Intake_Motor;
 
     public BNO055IMU imu;
 
@@ -25,8 +26,9 @@ public class HardwareMap {
         BL_Motor = _map.get(DcMotor.class, "bl-motor");
         BR_Motor = _map.get(DcMotor.class, "br-motor");
 
-//        Collector_Motor = _map.get(DcMotor.class, "collect-motor");
-//        Collector_Servo = _map.get(Servo.class, "collector-servo");
+        Collector_Motor_L = _map.get(DcMotor.class, "collect-motor-l");
+        Collector_Motor_R = _map.get(DcMotor.class, "collect-motor-r");
+        Collector_Intake_Motor = _map.get(DcMotor.class, "collector-intake-motor");
 
         Spinner_Motor = _map.get(DcMotor.class, "spinner-motor");
 
@@ -46,15 +48,15 @@ public class HardwareMap {
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-//        Webcam = _map.get(WebcamName.class, "Webcam 1");
+        Collector_Motor_L.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Collector_Motor_R.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
     protected void configureMotorsDefault() {
+        BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         FL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        Collector_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     protected void configureMotorsPosition() {
