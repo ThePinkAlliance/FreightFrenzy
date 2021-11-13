@@ -12,6 +12,15 @@ public class CustomNav_Park_Left extends LinearOpMode {
     Base Base;
     Navigation Navigation;
 
+    enum states {
+        START,
+        TURN_RIGHT,
+        PARK,
+        END
+    }
+    states currentState = states.START;
+    boolean reachedDes = false;
+
     /*
         Park in warehouse from left start position
      */
@@ -27,12 +36,36 @@ public class CustomNav_Park_Left extends LinearOpMode {
         // Wait for the game to begin
         waitForStart();
 
-        //move forwards away from wall
-        this.Navigation.driveToPos(19, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
-        //turn right
-        this.Navigation.driveToPos(6, 90, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
-        //go forwards until past barrier
-        this.Navigation.driveToPos(80, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+        while(opModeIsActive()){
+            switch(currentState){
+                case START:
+                    //move forwards away from wall
+                    reachedDes = this.Navigation.driveToPos(19, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+
+                    if(reachedDes){
+                        currentState = states.TURN_RIGHT;
+                    }
+                    break;
+                case TURN_RIGHT:
+                    //turn right
+                    reachedDes = this.Navigation.driveToPos(6, 90, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+
+                    if(reachedDes){
+                        currentState = states.PARK;
+                    }
+                    break;
+                case PARK:
+                    //go forwards until past barrier
+                    reachedDes = this.Navigation.driveToPos(80, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
+
+                    if(reachedDes){
+                        currentState = states.END;
+                    }
+                    break;
+                case END:
+                    break;
+            }
+        }
 
     }
 }
