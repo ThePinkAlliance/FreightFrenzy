@@ -126,8 +126,8 @@ public class Navigation extends HardwareMap {
 
         this.FL_Motor.setPower(leftFMotorCmd);
         this.BL_Motor.setPower(leftBMotorCmd);
-        this.FL_Motor.setPower(rightFMotorCmd);
-        this.FL_Motor.setPower(rightBMotorCmd);
+        this.FR_Motor.setPower(rightFMotorCmd);
+        this.BR_Motor.setPower(rightBMotorCmd);
 
         // True if navigated to position
         return (Math.abs(linearError) < POSITION_THRESHOLD) && (Math.abs(angleErrorDegrees) < ANGLE_THRESHOLD);

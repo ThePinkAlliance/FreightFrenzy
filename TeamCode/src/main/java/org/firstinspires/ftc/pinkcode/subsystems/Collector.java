@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.pinkcode.Constants;
 
@@ -13,8 +14,11 @@ public class Collector extends HardwareMap {
     }
     public enum CollectorIntakeStates {
         RUN,
-        HALT
+        REVERSE,
+        STOP
     }
+
+    private double Collector_Target_Position = 2048;
 
     // this is the current state for the bottom portion of the collector arm
     private CollectorStates currentState = CollectorStates.COLLECT;
@@ -26,23 +30,22 @@ public class Collector extends HardwareMap {
         super(_map);
     }
 
-    // this will run thought the collector states
+    // this will run though the collector states
     public void toggleState() {
         CollectorStates state = nextState();
 
         setState(state);
     }
-
-    public void drive(double power) {
-        this.Collector_Motor_L.setPower(power);
-        this.Collector_Motor_R.setPower(power);
-    }
-
-    // this will run though the inta ke states
+    // this will run though the intake states
     public void toggleIntakeState() {
         CollectorIntakeStates state = nextIntakeState();
 
         setIntakeState(state);
+    }
+
+    public void drive(double power) {
+        this.Collector_Motor_L.setPower(power / 2);
+        this.Collector_Motor_R.setPower(power / 2);
     }
 
     // this will set the state of the arm
@@ -72,6 +75,18 @@ public class Collector extends HardwareMap {
         Collector_Motor_R.setTargetPosition(angleTicks);
     }
 
+    public void lockPosition() {
+//        int angleTicks = (int) ((Constants.Ticks / 360) * angle);
+        double error = Collector_Motor_R.getCurrentPosition() - Collector_Motor_L.getCurrentPosition();
+
+        double power = (2.1 * error) - (1.5 * Collector_Motor_R.getCurrentPosition());
+
+        power = Range.clip(power, 0.3, 1);
+
+        Collector_Motor_R.setPower(power);
+        Collector_Motor_L.setPower(power);
+    }
+
     // this will calculate the angle from the amount of ticks the motor has moved.
     public double getAngle(DcMotor _motor) {
         int currentTicks = _motor.getCurrentPosition();
@@ -84,9 +99,11 @@ public class Collector extends HardwareMap {
         this.currentIntakeState = state;
 
         if (state == CollectorIntakeStates.RUN) {
-            this.Collector_Intake_Motor.setTargetPosition(Constants.CollectorGrabberPositions.OPEN);
+            this.Collector_Intake_Motor.setPower(Constants.CollectorGrabberPositions.OPEN);
+        } else if (state == CollectorIntakeStates.REVERSE) {
+            this.Collector_Intake_Motor.setPower(Constants.CollectorGrabberPositions.REVERSE);
         } else {
-            this.Collector_Intake_Motor.setTargetPosition(Constants.CollectorGrabberPositions.CLOSE);
+            this.Collector_Intake_Motor.setPower(0);
         }
     }
 
@@ -101,10 +118,10 @@ public class Collector extends HardwareMap {
     }
 
     private CollectorIntakeStates nextIntakeState() {
-        if (currentIntakeState == CollectorIntakeStates.HALT) {
+        if (currentIntakeState == CollectorIntakeStates.REVERSE) {
             return CollectorIntakeStates.RUN;
         } else {
-            return CollectorIntakeStates.HALT;
+            return CollectorIntakeStates.REVERSE;
         }
     }
 

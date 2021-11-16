@@ -7,8 +7,8 @@ import org.firstinspires.ftc.pinkcode.subsystems.Base;
 import org.firstinspires.ftc.pinkcode.subsystems.Collector;
 import org.firstinspires.ftc.pinkcode.subsystems.PizzaSpinner;
 
-@TeleOp(name = "Teleop", group = "Teleop")
-public class Teleop extends OpMode {
+@TeleOp(name = "Teleop Clutch", group = "Teleop")
+public class TeleopClutch extends OpMode {
     private Base Base;
     private Collector Collector;
     private PizzaSpinner PizzaSpinner;
@@ -34,11 +34,11 @@ public class Teleop extends OpMode {
         }
 
         // drives the left, right side's of the drive train from joystick positions
-        this.Base.tank(gamepad1.left_stick_y, gamepad1.right_stick_y);
+        this.Base.tank(gamepad1.left_stick_x, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         // when right bumper is pressed activate pizza spinner
         this.PizzaSpinner.spin(gamepad2.right_bumper, reduction_pizza_spinner);
-        this.PizzaSpinner.reverse(gamepad2.left_bumper);
+        this.PizzaSpinner.reverse(gamepad1.left_bumper);
 
         this.Collector.drive(-gamepad2.left_stick_y);
 
@@ -56,7 +56,7 @@ public class Teleop extends OpMode {
 
         if (gamepad2.left_trigger >= .2) {
             this.Collector.setIntakeState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorIntakeStates.REVERSE);
-        } else if (gamepad2.left_trigger <= .2) {
+        } else if (gamepad2.right_trigger <= .2) {
             this.Collector.setIntakeState(org.firstinspires.ftc.pinkcode.subsystems.Collector.CollectorIntakeStates.STOP);
         }
 

@@ -42,14 +42,22 @@ public class HardwareMap {
         BL_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
         FL_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
 
+        Collector_Intake_Motor.setDirection(DcMotorSimple.Direction.REVERSE);
+
         FL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         Collector_Motor_L.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Collector_Motor_R.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        Collector_Motor_L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Collector_Motor_R.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        Collector_Motor_L.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     protected void configureMotorsDefault() {

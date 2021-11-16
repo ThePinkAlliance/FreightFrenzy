@@ -1,3 +1,8 @@
+## Branches
+
+- `master` is for the tank drive robot's
+- `mech` is for the mechinum robots in december
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the Freight Frenzy (2021-2022) competition season.

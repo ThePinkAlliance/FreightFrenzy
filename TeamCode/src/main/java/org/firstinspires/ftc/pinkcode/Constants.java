@@ -24,8 +24,8 @@ public class Constants {
         int TOP = 100;
     }
     public interface CollectorGrabberPositions {
-        int CLOSE = 0;
-        int OPEN = 100;
+        int REVERSE = -1;
+        int OPEN = 1;
     }
 
     public static final double     COUNTS_PER_MOTOR_REV    = 2048 ;    // eg: Gobilda Motor Encoder
