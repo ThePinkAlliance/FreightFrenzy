@@ -11,20 +11,28 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vision extends HardwareMap{
+public class Vision extends HardwareMap {
+    private com.qualcomm.robotcore.hardware.HardwareMap _map;
+
     public Vision(com.qualcomm.robotcore.hardware.HardwareMap _map) {
         super(_map);
+
+        this._map = _map;
 
         initVuforia();
         initTfod();
     }
 
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
+    private static final String TFOD_MODEL_ASSET_CUSTOM = "model.tflite";
     private static final String[] LABELS = {
             "Ball",
             "Cube",
             "Duck",
             "Marker"
+    };
+    private static final String[] LABELS_CUSTOM = {
+            "red_shipping",
     };
     //License Key
     private static final String VUFORIA_KEY =
@@ -56,6 +64,7 @@ public class Vision extends HardwareMap{
                 }
             }
         }
+
         //If never found object in all recognitions, then it isnt there, so false
         return false;
     }
@@ -85,6 +94,10 @@ public class Vision extends HardwareMap{
         return labelRecs;
     }
 
+    public void activate() {
+        this.tfod.activate();
+    }
+
     //Use thread for this?
     public void LoopVision(){
 
@@ -100,7 +113,7 @@ public class Vision extends HardwareMap{
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
-//        parameters.cameraName = this.Webcam;
+        parameters.cameraName = this.Webcam;
 
         //  Instantiate the Vuforia engine
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
@@ -111,8 +124,8 @@ public class Vision extends HardwareMap{
      * Initialize the TensorFlow Object Detection engine.
      */
     private void initTfod() {
-        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        int tfodMonitorViewId = this._map.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", this._map.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfodParameters.minResultConfidence = 0.8f;
         tfodParameters.isModelTensorFlow2 = true;

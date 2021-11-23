@@ -14,6 +14,7 @@ public class Dashboard extends HardwareMap {
         super(_map);
 
         this.dash = FtcDashboard.getInstance();
+        this.dash.setTelemetryTransmissionInterval(25);
     }
 
     public void sendBitmap(Bitmap bitmap) {

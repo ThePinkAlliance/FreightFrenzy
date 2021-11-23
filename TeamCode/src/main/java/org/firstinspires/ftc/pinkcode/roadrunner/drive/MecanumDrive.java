@@ -29,6 +29,7 @@ import org.firstinspires.ftc.pinkcode.roadrunner.TrajectorySequence.TrajectorySe
 import org.firstinspires.ftc.pinkcode.roadrunner.TrajectorySequence.TrajectorySequenceBuilder;
 import org.firstinspires.ftc.pinkcode.roadrunner.TrajectorySequence.TrajectorySequenceRunner;
 import org.firstinspires.ftc.pinkcode.roadrunner.util.LynxModuleUtil;
+import org.firstinspires.ftc.pinkcode.subsystems.Dashboard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,9 +67,12 @@ public class MecanumDrive extends com.acmerobotics.roadrunner.drive.MecanumDrive
 
     private BNO055IMU imu;
     private VoltageSensor batteryVoltageSensor;
+    private Dashboard dash;
 
     public MecanumDrive(HardwareMap hardwareMap) {
         super(DriveConstants.kV, DriveConstants.kA, DriveConstants.kStatic, TRACK_WIDTH, TRACK_WIDTH, LATERAL_MULTIPLIER);
+
+        dash = new Dashboard(hardwareMap);
 
         follower = new HolonomicPIDVAFollower(TRANSLATIONAL_PID, TRANSLATIONAL_PID, HEADING_PID,
                 new Pose2d(0.5, 0.5, Math.toRadians(5.0)), 0.5);
