@@ -3,10 +3,10 @@ package org.firstinspires.ftc.pinkcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.pinkcode.Constants;
 import org.firstinspires.ftc.pinkcode.subsystems.Base;
-import org.firstinspires.ftc.pinkcode.subsystems.Collector;
-import org.firstinspires.ftc.pinkcode.subsystems.PizzaSpinner;
 import org.firstinspires.ftc.pinkcode.subsystems.Vision;
+import org.firstinspires.ftc.pinkcode.utils.Utils;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
@@ -16,6 +16,7 @@ import java.util.List;
 public class Teleop extends OpMode {
     private Base Base;
     private Vision Vision;
+    private Utils Utils;
 
     @Override
     public void init() {
@@ -37,7 +38,9 @@ public class Teleop extends OpMode {
         if (recs != null && !recs.isEmpty()) {
             Recognition baseRec = recs.get(0);
             double angleToObject = baseRec.estimateAngleToObject(AngleUnit.DEGREES);
+            double angleToRobot = Utils.math.calculateFromObject(angleToObject, Constants.CAMERA_POSITIONS.FRONT);
             telemetry.addData("Angle: ", angleToObject);
+            telemetry.addData("Angle From Robot: ", angleToRobot);
         }
 
         telemetry.update();

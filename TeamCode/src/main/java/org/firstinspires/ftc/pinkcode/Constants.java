@@ -23,6 +23,13 @@ public class Constants {
         int MIDDLE = 50;
         int TOP = 100;
     }
+
+    public interface CAMERA_POSITIONS {
+        int FRONT = 0;
+        int LEFT = -45;
+        int RIGHT = 45;
+    }
+
     public interface CollectorGrabberPositions {
         int REVERSE = -1;
         int OPEN = 1;

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.pinkcode.utils;
 
+import org.firstinspires.ftc.pinkcode.Constants;
+
 public class Math {
 
     /**
@@ -10,5 +12,15 @@ public class Math {
      */
     public double getDistanceFromAngle(double angle, double height) {
         return height / java.lang.Math.sin(angle);
+    }
+
+    /**
+     *
+     * @param objectAngle
+     * @param cameraPosition
+     * @return angle from the front of the robot
+     */
+    public double calculateFromObject(double objectAngle, int cameraPosition) {
+        return objectAngle + cameraPosition;
     }
 }
