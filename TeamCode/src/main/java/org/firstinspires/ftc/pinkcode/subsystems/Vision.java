@@ -127,7 +127,7 @@ public class Vision extends HardwareMap {
         int tfodMonitorViewId = this._map.appContext.getResources().getIdentifier(
                 "tfodMonitorViewId", "id", this._map.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minResultConfidence = 0.8f;
+        tfodParameters.minResultConfidence = 0.97f;
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 320;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);

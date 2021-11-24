@@ -16,6 +16,7 @@ public class HardwareMap {
     protected DcMotor BR_Motor;
     protected DcMotor Collector_Motor_L;
     protected DcMotor Collector_Motor_R;
+    protected DcMotor Turret_Rotate_Motor;
 
     protected WebcamName Webcam;
 
@@ -33,6 +34,8 @@ public class HardwareMap {
         BR_Motor = _map.get(DcMotorEx.class, "rightB_drive");
         FL_Motor = _map.get(DcMotorEx.class, "leftF_drive");
         BL_Motor = _map.get(DcMotorEx.class, "leftB_drive");
+
+        Turret_Rotate_Motor = _map.get(DcMotor.class, "turret_rot");
 
 //        Collector_Motor_L = _map.get(DcMotor.class, "collect-motor-l");
 //        Collector_Motor_R = _map.get(DcMotor.class, "collect-motor-r");
@@ -59,6 +62,8 @@ public class HardwareMap {
         BL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        Turret_Rotate_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 //        Spinner_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //
 //        Collector_Motor_L.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -75,6 +80,7 @@ public class HardwareMap {
         FL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Turret_Rotate_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     protected void configureMotorsPosition() {
