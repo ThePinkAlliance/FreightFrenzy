@@ -33,11 +33,12 @@ public class Teleop extends OpMode {
 
         List<Recognition> recs = Vision.GetAllRecOfLabel("red_shipping");
 
-        Recognition asdf = recs.get(0);
+        if (recs != null) {
+            Recognition asdf = recs.get(0);
+            double jkl = asdf.estimateAngleToObject(AngleUnit.DEGREES);
+            telemetry.addData("Angle: ", jkl);
+        }
 
-        double jkl = asdf.estimateAngleToObject(AngleUnit.DEGREES);
-
-        telemetry.addData("Angle: ", jkl);
         telemetry.update();
     }
 
