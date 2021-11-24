@@ -35,9 +35,9 @@ public class Teleop extends OpMode {
 
         //for null statements
         if (recs != null) {
-            Recognition asdf = recs.get(0);
-            double jkl = asdf.estimateAngleToObject(AngleUnit.DEGREES);
-            telemetry.addData("Angle: ", jkl);
+            Recognition baseRec = recs.get(0);
+            double angleToObject = baseRec.estimateAngleToObject(AngleUnit.DEGREES);
+            telemetry.addData("Angle: ", angleToObject);
         }
 
         telemetry.update();
