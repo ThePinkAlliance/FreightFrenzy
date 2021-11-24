@@ -7,6 +7,10 @@ import org.firstinspires.ftc.pinkcode.subsystems.Base;
 import org.firstinspires.ftc.pinkcode.subsystems.Collector;
 import org.firstinspires.ftc.pinkcode.subsystems.PizzaSpinner;
 import org.firstinspires.ftc.pinkcode.subsystems.Vision;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+
+import java.util.List;
 
 @TeleOp(name = "Teleop", group = "Teleop")
 public class Teleop extends OpMode {
@@ -27,6 +31,14 @@ public class Teleop extends OpMode {
         // drives the left, right side's of the drive train from joystick positions
         this.Base.drive(gamepad1.left_stick_x, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
+        List<Recognition> recs = Vision.GetAllRecOfLabel("red_shipping");
+
+        Recognition asdf = recs.get(0);
+
+        double jkl = asdf.estimateAngleToObject(AngleUnit.DEGREES);
+
+        telemetry.addData("Angle: ", jkl);
         telemetry.update();
     }
+
 }
