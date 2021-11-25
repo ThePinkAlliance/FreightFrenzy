@@ -23,4 +23,12 @@ public class Math {
     public double calculateFromObject(double objectAngle, int cameraPosition) {
         return objectAngle + cameraPosition;
     }
+
+    public double convertToRoadrunner(double angle) {
+        if (angle >= 0.1) {
+            return angle + 90;
+        } else {
+            return angle - 360;
+        }
+    }
 }

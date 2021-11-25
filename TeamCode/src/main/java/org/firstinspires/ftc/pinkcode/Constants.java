@@ -26,7 +26,7 @@ public class Constants {
 
     public interface CAMERA_POSITIONS {
         int FRONT = 0;
-        int LEFT = -45;
+        int LEFT = -90;
         int RIGHT = 45;
     }
 

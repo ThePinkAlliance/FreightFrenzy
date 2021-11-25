@@ -46,10 +46,10 @@ import static org.firstinspires.ftc.pinkcode.roadrunner.drive.DriveConstants.enc
 
 
 public class MecanumDrive extends com.acmerobotics.roadrunner.drive.MecanumDrive {
-    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
+    public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(9, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(9, 0, 0);
 
-    public static double LATERAL_MULTIPLIER = 1;
+    public static double LATERAL_MULTIPLIER = 1.505;
 
     public static double VX_WEIGHT = 1;
     public static double VY_WEIGHT = 1;
@@ -95,10 +95,10 @@ public class MecanumDrive extends com.acmerobotics.roadrunner.drive.MecanumDrive
         // upward (normal to the floor) using a command like the following:
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
 
-        leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
-        leftRear = hardwareMap.get(DcMotorEx.class, "leftRear");
-        rightRear = hardwareMap.get(DcMotorEx.class, "rightRear");
-        rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
+        leftFront = hardwareMap.get(DcMotorEx.class, "leftF_drive");
+        leftRear = hardwareMap.get(DcMotorEx.class, "leftB_drive");
+        rightRear = hardwareMap.get(DcMotorEx.class, "rightB_drive");
+        rightFront = hardwareMap.get(DcMotorEx.class, "rightF_drive");
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 

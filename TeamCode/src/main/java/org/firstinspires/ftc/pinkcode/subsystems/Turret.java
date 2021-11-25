@@ -8,12 +8,13 @@ public class Turret extends HardwareMap {
     public void setCurrentAngle(double angle) {
         double error = getCurrentAngle() - angle;
 
-        double power = (2.1 * error) - (1.5 * Turret_Rotate_Motor.getCurrentPosition());
+        double power = (2.1 * error) - (1.5 * Turret_Rotate_Motor_L.getCurrentPosition());
 
-        Turret_Rotate_Motor.setPower(power);
+        Turret_Rotate_Motor_L.setPower(power);
+        Turret_Rotate_Motor_R.setPower(power);
     }
 
     public double getCurrentAngle() {
-        return Turret_Rotate_Motor.getCurrentPosition();
+        return Turret_Rotate_Motor_L.getCurrentPosition();
     }
 }
