@@ -24,11 +24,11 @@ public class Math {
         return objectAngle + cameraPosition;
     }
 
-    public double convertToRoadrunner(double angle) {
-        if (angle >= 0.1) {
-            return angle + 90;
+    public double convertToRoadrunner(double angle, int cameraPosition) {
+        if (angle <= -0.01) {
+            return (angle + cameraPosition) + 360;
         } else {
-            return angle - 360;
+            return angle;
         }
     }
 }
