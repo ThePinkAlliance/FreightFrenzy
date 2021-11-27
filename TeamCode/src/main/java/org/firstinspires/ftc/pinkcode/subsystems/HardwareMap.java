@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.pinkcode.roadrunner.util.Encoder;
@@ -43,6 +44,9 @@ public class HardwareMap {
         Turret_Rotate_Motor_L = _map.get(DcMotor.class, "shoot1");
         Turret_Rotate_Motor_R = _map.get(DcMotor.class, "shoot2");
 
+        frontLeftDistance = (Rev2mDistanceSensor) _map.get(DistanceSensor.class, "distance-sensor");
+        frontLeftColor = _map.get(ColorSensor.class, "color-sensor");
+
         imu = _map.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
@@ -64,6 +68,9 @@ public class HardwareMap {
         Turret_Rotate_Motor_R.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         Turret_Rotate_Motor_L.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        Center_Pod_Encoder = _map.get(Encoder.class, "centerP-encoder");
+        Center_Pod_Servo = _map.get(Servo.class, "centerP-servo");
     }
 
     protected void configureMotorsDefault() {
