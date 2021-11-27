@@ -37,8 +37,15 @@ public class AutoAlign extends LinearOpMode {
                 for (Recognition rec: recs) {
                     double angleToObject = rec.estimateAngleToObject(AngleUnit.DEGREES);
                     double angleToRobot = utils.math.calculateFromObject(angleToObject, Constants.CAMERA_POSITIONS.FRONT);
+                    double convertedAngle = utils.math.convertToRoadrunner(angleToRobot, Constants.CAMERA_POSITIONS.FRONT);
 
-                    Trajectory align = drive.trajectoryBuilder(new Pose2d()).lineToLinearHeading(new Pose2d(0, 0, Math.toRadians(utils.math.convertToRoadrunner(angleToRobot)))).build();
+                    telemetry.addData("angleToRobot", angleToRobot);
+                    telemetry.addData("angleToRobotConverted", convertedAngle);
+
+                    telemetry.update();
+
+                    Trajectory align = drive.trajectoryBuilder(new Pose2d()).lineToLinearHeading(new Pose2d(0, 0, Math.toRadians(convertedAngle))).build();
+
                     drive.followTrajectory(align);
                 }
             }

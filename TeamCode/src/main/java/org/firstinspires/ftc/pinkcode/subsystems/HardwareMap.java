@@ -1,10 +1,14 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.pinkcode.roadrunner.util.Encoder;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
 public class HardwareMap {
@@ -17,6 +21,12 @@ public class HardwareMap {
     protected DcMotor Collector_Motor_R;
     protected DcMotor Turret_Rotate_Motor_L;
     protected DcMotor Turret_Rotate_Motor_R;
+
+    protected Servo Center_Pod_Servo;
+    protected Encoder Center_Pod_Encoder;
+
+    protected ColorSensor frontLeftColor;
+    protected Rev2mDistanceSensor frontLeftDistance;
 
     protected WebcamName Webcam;
 

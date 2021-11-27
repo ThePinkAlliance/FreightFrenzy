@@ -16,18 +16,15 @@ import java.util.List;
 @TeleOp(name = "Teleop", group = "Teleop")
 public class Teleop extends OpMode {
     private Base Base;
-//    private Vision Vision;
     private Turret Turret;
     private Utils Utils;
 
     @Override
     public void init() {
         Base = new Base(hardwareMap);
-//        Vision = new Vision(hardwareMap);
         Turret = new Turret(hardwareMap);
         Utils = new Utils();
 
-//        this.Vision.activate();
         this.Base.configureBase(false);
     }
 
@@ -36,16 +33,8 @@ public class Teleop extends OpMode {
         // drives the left, right side's of the drive train from joystick positions
         this.Base.drive(gamepad1.left_stick_x, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
-//        List<Recognition> recs = Vision.GetAllRecOfLabel("red_shipping");
-//
-//        // for null statements
-//        if (recs != null && !recs.isEmpty()) {
-//            Recognition baseRec = recs.get(0);
-//            double angleToObject = baseRec.estimateAngleToObject(AngleUnit.DEGREES);
-//            double angleToRobot = Utils.math.calculateFromObject(angleToObject, Constants.CAMERA_POSITIONS.LEFT);
-//            telemetry.addData("Angle: ", angleToObject);
-//            telemetry.addData("Angle From Robot: ", angleToRobot);
-//        }
+        // this will retract the center odometry pod if it gets to close to the barrier
+        this.Base.needToRetract();
 
         telemetry.update();
     }

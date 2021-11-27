@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
 import org.firstinspires.ftc.pinkcode.Constants;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
 /**
  * Motor Type; Gobilda
@@ -9,6 +11,10 @@ import org.firstinspires.ftc.pinkcode.Constants;
  */
 
 public class Base extends HardwareMap {
+    private double retractTime = 4;
+    private boolean inWarehouse = false;
+
+    public OdoemtryPod centerPod = new OdoemtryPod(this.Center_Pod_Servo, this.Center_Pod_Encoder);
     public Base(com.qualcomm.robotcore.hardware.HardwareMap _map) {
         super(_map);
     }
@@ -19,6 +25,42 @@ public class Base extends HardwareMap {
         } else {
             this.configureMotorsDefault();
         }
+    }
+
+    // possible issue with this
+    // if the drivers drive up to the barrier but do not go over the pods will retract...
+    // depending on the speed of the servos we can wait until the z axis on the imu bumps up...
+    // and the distance to the barrier is very small we can retract and leave them retracted until exiting, for exiting the warehouse...
+    // if imu z axis bumps up again and is close to the barrier we can lower the pods and reset roadrunners position
+    public void needToRetract() {
+        double distance = this.frontLeftDistance.getDistance(DistanceUnit.INCH);
+
+        Velocity vel = this.imu.getVelocity().toUnit(DistanceUnit.INCH);
+
+        int r = this.frontLeftColor.red();
+        int g = this.frontLeftColor.green();
+        int b = this.frontLeftColor.blue();
+
+        // if the color sensor detects the barriers color return true. also the RGB values are placeholders for now
+        boolean isBarrierColor = r == 3 && g == 5 && b == 1;
+
+        // if the yVelocity is greater then the xVelocity use the yVelocity
+        if (vel.yVeloc > vel.xVeloc && isBarrierColor) {
+            double secsUntilReached = vel.yVeloc / distance;
+
+            // if seconds until reached barrier retract the odometry pods
+            if (secsUntilReached <= retractTime) {
+                centerPod.retract();
+            }
+        } else if (vel.xVeloc > vel.yVeloc && isBarrierColor) {
+            double secsUntilReached = vel.xVeloc / distance;
+
+            // if seconds until reached barrier retract the odometry pods
+            if (secsUntilReached <= retractTime) {
+                centerPod.retract();
+            }
+        }
+
     }
 
     public double getDriveDiff() {
