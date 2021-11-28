@@ -14,7 +14,10 @@ public class Base extends HardwareMap {
     private double retractTime = 4;
     private boolean inWarehouse = false;
 
-    public OdoemtryPod centerPod = new OdoemtryPod(this.Center_Pod_Servo, this.Center_Pod_Encoder);
+    public OdoemtryPod centerPod = new OdoemtryPod(this.Center_Pod_Servo);
+    public OdoemtryPod leftPod = new OdoemtryPod(this.Left_Pod_Servo);
+    public OdoemtryPod rightPod = new OdoemtryPod(this.Right_Pod_Servo);
+
     public Base(com.qualcomm.robotcore.hardware.HardwareMap _map) {
         super(_map);
     }
@@ -32,6 +35,7 @@ public class Base extends HardwareMap {
     // depending on the speed of the servos we can wait until the z axis on the imu bumps up...
     // and the distance to the barrier is very small we can retract and leave them retracted until exiting, for exiting the warehouse...
     // if imu z axis bumps up again and is close to the barrier we can lower the pods and reset roadrunners position
+    @Deprecated
     public void needToRetract() {
         double distance = this.frontLeftDistance.getDistance(DistanceUnit.INCH);
 

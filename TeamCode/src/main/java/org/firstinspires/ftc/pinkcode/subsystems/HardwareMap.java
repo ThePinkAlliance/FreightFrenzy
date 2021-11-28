@@ -23,10 +23,16 @@ public class HardwareMap {
     protected DcMotor Turret_Rotate_Motor_L;
     protected DcMotor Turret_Rotate_Motor_R;
 
-    protected Servo Center_Pod_Servo;
-    protected Encoder Center_Pod_Encoder;
+    protected Servo Left_Pod_Servo;
 
+    protected Servo Right_Pod_Servo;
+
+    protected Servo Center_Pod_Servo;
+
+    @Deprecated
     protected ColorSensor frontLeftColor;
+
+    @Deprecated
     protected Rev2mDistanceSensor frontLeftDistance;
 
     protected WebcamName Webcam;
@@ -69,8 +75,9 @@ public class HardwareMap {
 
         Turret_Rotate_Motor_L.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        Center_Pod_Encoder = _map.get(Encoder.class, "centerP-encoder");
         Center_Pod_Servo = _map.get(Servo.class, "centerP-servo");
+        Right_Pod_Servo = _map.get(Servo.class, "rightP-servo");
+        Left_Pod_Servo = _map.get(Servo.class, "leftP-servo");
     }
 
     protected void configureMotorsDefault() {

@@ -14,6 +14,18 @@ public class OdoemtryPod {
     public OdoemtryPod(Servo servo, Encoder encoder) {
         this.encoder = encoder;
         this.servo = servo;
+
+        if (servo.getPosition() > (minPosition + 1)) {
+            this.isRetracted = true;
+        }
+    }
+
+    public OdoemtryPod(Servo servo) {
+        this.servo = servo;
+
+        if (servo.getPosition() > (minPosition + 1)) {
+            this.isRetracted = true;
+        }
     }
 
     public OdoemtryPod(Servo servo, Encoder encoder, int minPosition, int maxPosition) {
@@ -28,16 +40,30 @@ public class OdoemtryPod {
         }
     }
 
+    public void setEncoder(Encoder encoder) {
+        this.encoder = encoder;
+    }
+
     public int getCounts() {
-        return this.encoder.getCurrentPosition();
+        if (encoder != null) {
+            return this.encoder.getCurrentPosition();
+        }
+
+        return 0;
     }
 
     public double getCorrectedVelocity() {
-        return this.encoder.getCorrectedVelocity();
+        if (encoder != null) {
+            return this.encoder.getCorrectedVelocity();
+        }
+
+        return 0.0;
     }
 
     public void setDirection(Encoder.Direction direction) {
-        this.encoder.setDirection(direction);
+        if (encoder != null) {
+            this.encoder.setDirection(direction);
+        }
     }
 
     public void home() {
