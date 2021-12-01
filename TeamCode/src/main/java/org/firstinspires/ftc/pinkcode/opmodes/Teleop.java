@@ -27,10 +27,10 @@ public class Teleop extends OpMode {
         this.Base.configureBase(false);
     }
 
-    //variables used in the following
+    // variables used in the following
     boolean checkedOnce = false;
     double focalLength = 0;
-    double widthOfObject = 15; //I think it is 15 inches, the object is the shipping hub
+    double widthOfObject = 15; // I think it is 15 inches, the object is the shipping hub
     @Override
     public void loop() {
         // drives the left, right side's of the drive train from joystick positions
@@ -38,7 +38,7 @@ public class Teleop extends OpMode {
 
         List<Recognition> recs = Vision.GetAllRecOfLabel("red_shipping");
 
-        //for null statements
+        // for null statements
         if (recs != null && !recs.isEmpty()) {
             Recognition baseRec = recs.get(0);
             double angleToObject = baseRec.estimateAngleToObject(AngleUnit.DEGREES);
@@ -46,15 +46,15 @@ public class Teleop extends OpMode {
             telemetry.addData("Angle: ", angleToObject);
             telemetry.addData("Angle From Robot: ", angleToRobot);
 
-            //to find the distance, we need to find the focal length
-            //focal length is easy to find: F = (width of object (px) * distance from object)/widthOfObject
-            if (checkedOnce == false) {
+            // to find the distance, we need to find the focal length
+            // focal length is easy to find: F = (width of object (px) * distance from object) / widthOfObject
+            if (!checkedOnce) {
                 int imageWidthPX = baseRec.getImageWidth();
                 int distance = 24; //inches
                 focalLength = (imageWidthPX * distance) / widthOfObject;
                 checkedOnce = true;
             }
-            //Once we have focal length, the equation for distance(D) is as follows: D = (Width * Focal length)/ new pixel width
+            // Once we have focal length, the equation for distance(D) is as follows: D = (Width * Focal length)/ new pixel width
             int newPixelSize = baseRec.getImageWidth();
             double distanceToObject = (widthOfObject * focalLength) / newPixelSize;
             telemetry.addData("Distance From Object: ", distanceToObject);

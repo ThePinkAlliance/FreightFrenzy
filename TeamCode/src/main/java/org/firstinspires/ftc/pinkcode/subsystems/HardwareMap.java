@@ -24,10 +24,10 @@ public class HardwareMap {
     protected DcMotor Turret_Rotate_Motor_R;
 
     protected Servo Left_Pod_Servo;
-
     protected Servo Right_Pod_Servo;
-
     protected Servo Center_Pod_Servo;
+
+    protected Encoder leftEncoder, rightEncoder, frontEncoder;
 
     @Deprecated
     protected ColorSensor frontLeftColor;
@@ -50,8 +50,8 @@ public class HardwareMap {
         Turret_Rotate_Motor_L = _map.get(DcMotor.class, "shoot1");
         Turret_Rotate_Motor_R = _map.get(DcMotor.class, "shoot2");
 
-        frontLeftDistance = (Rev2mDistanceSensor) _map.get(DistanceSensor.class, "distance-sensor");
-        frontLeftColor = _map.get(ColorSensor.class, "color-sensor");
+//        frontLeftDistance = (Rev2mDistanceSensor) _map.get(DistanceSensor.class, "distance-sensor");
+//        frontLeftColor = _map.get(ColorSensor.class, "color-sensor");
 
         imu = _map.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -75,9 +75,13 @@ public class HardwareMap {
 
         Turret_Rotate_Motor_L.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        Center_Pod_Servo = _map.get(Servo.class, "centerP-servo");
-        Right_Pod_Servo = _map.get(Servo.class, "rightP-servo");
-        Left_Pod_Servo = _map.get(Servo.class, "leftP-servo");
+//        Center_Pod_Servo = _map.get(Servo.class, "centerP-servo");
+//        Right_Pod_Servo = _map.get(Servo.class, "rightP-servo");
+//        Left_Pod_Servo = _map.get(Servo.class, "leftP-servo");
+//
+//        leftEncoder = new Encoder(_map.get(DcMotorEx.class, "leftF_drive"));
+//        rightEncoder = new Encoder(_map.get(DcMotorEx.class, "rightB_drive"));
+//        frontEncoder = new Encoder(_map.get(DcMotorEx.class, "rightF_drive"));
     }
 
     protected void configureMotorsDefault() {
