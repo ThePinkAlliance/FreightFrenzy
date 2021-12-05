@@ -20,12 +20,15 @@ public class HardwareMap {
     protected DcMotor BR_Motor;
     protected DcMotor Collector_Motor_L;
     protected DcMotor Collector_Motor_R;
+
     protected DcMotor Turret_Rotate_Motor_L;
     protected DcMotor Turret_Rotate_Motor_R;
 
-    protected Servo Left_Pod_Servo;
-    protected Servo Right_Pod_Servo;
-    protected Servo Center_Pod_Servo;
+    protected DcMotor Turret_Motor;
+
+    protected Servo Grabber_Rotate_L, Grabber_Rotate_R, Grabber_Motion;
+
+    protected Servo Left_Pod_Servo, Right_Pod_Servo, Center_Pod_Servo;
 
     protected Encoder leftEncoder, rightEncoder, frontEncoder;
 
@@ -47,6 +50,12 @@ public class HardwareMap {
         FL_Motor = _map.get(DcMotorEx.class, "leftF_drive");
         BL_Motor = _map.get(DcMotorEx.class, "leftB_drive");
 
+//        Turret_Motor = _map.get(DcMotor.class, "turretR");
+
+//        Grabber_Rotate_L = _map.get(Servo.class, "grabber_RL");
+//        Grabber_Rotate_R = _map.get(Servo.class, "grabber_RR");
+
+        // these are old and will be removed after testing
         Turret_Rotate_Motor_L = _map.get(DcMotor.class, "shoot1");
         Turret_Rotate_Motor_R = _map.get(DcMotor.class, "shoot2");
 

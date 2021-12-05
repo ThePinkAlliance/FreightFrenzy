@@ -35,6 +35,11 @@ public class Constants {
         int OPEN = 1;
     }
 
+    public interface GRABBER_POSITIONS {
+        int CLOSE = 0;
+        int OPEN = 10;
+    }
+
     public static final double     COUNTS_PER_MOTOR_REV    = 2048 ;    // eg: Gobilda Motor Encoder
     public static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
     public static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
