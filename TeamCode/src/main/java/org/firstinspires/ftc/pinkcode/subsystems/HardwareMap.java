@@ -23,11 +23,13 @@ public class HardwareMap {
     protected DcMotor Turret_Rotate_Motor_L;
     protected DcMotor Turret_Rotate_Motor_R;
 
-    protected Servo Left_Pod_Servo;
-    protected Servo Right_Pod_Servo;
-    protected Servo Center_Pod_Servo;
-
     protected Encoder leftEncoder, rightEncoder, frontEncoder;
+
+    protected DcMotor Turret_Motor;
+
+    protected Servo Grabber_Rotate_L, Grabber_Rotate_R, Grabber_Motion;
+
+    protected Servo Left_Pod_Servo, Right_Pod_Servo, Center_Pod_Servo;
 
     @Deprecated
     protected ColorSensor frontLeftColor;
