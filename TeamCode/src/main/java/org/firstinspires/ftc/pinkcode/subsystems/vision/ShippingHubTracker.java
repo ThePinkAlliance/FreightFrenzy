@@ -18,7 +18,7 @@ public class ShippingHubTracker implements Runnable {
             "red_shipping"
     };
     private TFObjectDetector detector;
-    private List<Recognition> foundRecognitions;
+    private List<Recognition> foundRecognitions = new ArrayList<>();
     private HardwareMap _map;
     private WebcamName Webcam;
 
