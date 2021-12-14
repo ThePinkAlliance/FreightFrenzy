@@ -17,11 +17,11 @@ public class BasicAuto extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         this.base = new Base(hardwareMap);
-//        this.drive = new MecanumDrive(hardwareMap);
+        this.drive = new MecanumDrive(hardwareMap);
 
         waitForStart();
 
-        Trajectory one = drive.trajectoryBuilder(new Pose2d()).forward(12).build();
+        Trajectory one = drive.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0))).forward(12).build();
 
         drive.followTrajectory(one);
     }

@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class PizzaSpinner extends HardwareMap {
 
-    private final double speed = 0.3;
+    private final double speed = 0.557;
 
     public PizzaSpinner(com.qualcomm.robotcore.hardware.HardwareMap _map) {
         super(_map);

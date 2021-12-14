@@ -12,6 +12,12 @@ public class Constants {
     public static double towerGearCircumference = 4.85;
     public static double towerGearLength = 4.23;
 
+    public static final String[] LABELS_CUSTOM = {
+            "red_shipping",
+    };
+
+    public static final String TFOD_MODEL_ASSET_CUSTOM = "model.tflite";
+
     public static double Width = 10;
 
     // this is for the amount of ticks per inch

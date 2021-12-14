@@ -39,7 +39,7 @@ public class CustomNav_Park_Right extends LinearOpMode {
         while(opModeIsActive()){
             switch(currentState){
                 case START:
-                    //move forwards away from wall
+                    // move forwards away from wall
                     reachedDes = this.Navigation.driveToPos(19, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
 
                     if(reachedDes){
@@ -47,7 +47,7 @@ public class CustomNav_Park_Right extends LinearOpMode {
                     }
                     break;
                 case TURN_RIGHT:
-                    //turn right
+                    // turn right
                     reachedDes = this.Navigation.driveToPos(6, 90, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
 
                     if(reachedDes){
@@ -55,7 +55,7 @@ public class CustomNav_Park_Right extends LinearOpMode {
                     }
                     break;
                 case PARK:
-                    //go forwards until past barrier
+                    // go forwards until past barrier
                     reachedDes = this.Navigation.driveToPos(32, Base.imu.getAngularOrientation().thirdAngle, Base.getBasePosCounts(), Base.imu.getAngularOrientation().thirdAngle, 5, Constants.DRIVE_SPEED);
 
                     if(reachedDes){

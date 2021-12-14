@@ -192,10 +192,13 @@ public class MecanumDrive extends com.acmerobotics.roadrunner.drive.MecanumDrive
         TrajectoryVelocityConstraint velLocalConstraint;
         TrajectoryAccelerationConstraint accelLocalConstraint;
 
+        // Max Velocity Profile
         velLocalConstraint = new MinVelocityConstraint(Arrays.asList(
                 new AngularVelocityConstraint(180),
                 new MecanumVelocityConstraint(MAX_VEL-10, TRACK_WIDTH)
         ));
+
+        // Max Accel Profile
         accelLocalConstraint = new ProfileAccelerationConstraint(MAX_ACCEL-2);
 
         return new TrajectoryBuilder(startPose, startHeading, velLocalConstraint, accelLocalConstraint);

@@ -24,15 +24,11 @@ public class Vision extends HardwareMap {
     }
 
     private static final String TFOD_MODEL_ASSET = "FreightFrenzy_BCDM.tflite";
-    private static final String TFOD_MODEL_ASSET_CUSTOM = "model.tflite";
     private static final String[] LABELS = {
             "Ball",
             "Cube",
             "Duck",
             "Marker"
-    };
-    private static final String[] LABELS_CUSTOM = {
-            "red_shipping",
     };
     //License Key
     private static final String VUFORIA_KEY =
@@ -131,6 +127,6 @@ public class Vision extends HardwareMap {
         tfodParameters.isModelTensorFlow2 = true;
         tfodParameters.inputSize = 320;
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.loadModelFromAsset(TFOD_MODEL_ASSET_CUSTOM, LABELS_CUSTOM);
+        tfod.loadModelFromAsset(Constants.TFOD_MODEL_ASSET_CUSTOM, Constants.LABELS_CUSTOM);
     }
 }
