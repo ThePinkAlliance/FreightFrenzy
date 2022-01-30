@@ -10,7 +10,6 @@ import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.pinkcode.roadrunner.util.Encoder;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 
 public class HardwareMap {
     protected DcMotor Spinner_Motor;
@@ -20,47 +19,38 @@ public class HardwareMap {
     protected DcMotor BR_Motor;
     protected DcMotor Collector_Motor_L;
     protected DcMotor Collector_Motor_R;
-    protected DcMotor Turret_Rotate_Motor_L;
-    protected DcMotor Turret_Rotate_Motor_R;
 
     protected Encoder leftEncoder, rightEncoder, frontEncoder;
 
-    protected DcMotor Turret_Motor;
-
     protected Servo Grabber_Rotate_L, Grabber_Rotate_R, Grabber_Motion;
 
+    protected Servo Collector_rotate;
+
     protected Servo Left_Pod_Servo, Right_Pod_Servo, Center_Pod_Servo;
-
-    @Deprecated
-    protected ColorSensor frontLeftColor;
-
-    @Deprecated
-    protected Rev2mDistanceSensor frontLeftDistance;
-
-    protected WebcamName Webcam;
 
     protected DcMotor Collector_Intake_Motor;
 
     public BNO055IMU imu;
 
     public HardwareMap(com.qualcomm.robotcore.hardware.HardwareMap _map) {
-        FR_Motor = _map.get(DcMotorEx.class, "rightF_drive");
-        BR_Motor = _map.get(DcMotorEx.class, "rightB_drive");
-        FL_Motor = _map.get(DcMotorEx.class, "leftF_drive");
-        BL_Motor = _map.get(DcMotorEx.class, "leftB_drive");
+        FR_Motor = _map.get(DcMotorEx.class, "rightF");
+        BR_Motor = _map.get(DcMotorEx.class, "rightB");
+        FL_Motor = _map.get(DcMotorEx.class, "leftF");
+        BL_Motor = _map.get(DcMotorEx.class, "leftB");
 
-        Turret_Rotate_Motor_L = _map.get(DcMotor.class, "shoot1");
-        Turret_Rotate_Motor_R = _map.get(DcMotor.class, "shoot2");
+        Collector_Motor_L = _map.get(DcMotor.class, "collect-l");
+        Collector_Motor_R = _map.get(DcMotor.class, "collect-r");
 
-//        frontLeftDistance = (Rev2mDistanceSensor) _map.get(DistanceSensor.class, "distance-sensor");
-//        frontLeftColor = _map.get(ColorSensor.class, "color-sensor");
+        Collector_Intake_Motor = _map.get(DcMotor.class, "intake");
+
+        Collector_rotate = _map.get(Servo.class, "coll-rot");
+
+        Spinner_Motor = _map.get(DcMotor.class, "pizza");
 
         imu = _map.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
         imu.initialize(parameters);
-
-        Webcam = _map.get(WebcamName.class, "webcam");
 
         configureMotorsDefault();
 
@@ -72,18 +62,13 @@ public class HardwareMap {
         BL_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        Turret_Rotate_Motor_L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        Turret_Rotate_Motor_R.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Collector_Motor_R.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Collector_Motor_L.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        Collector_Intake_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
-        Turret_Rotate_Motor_L.setDirection(DcMotorSimple.Direction.REVERSE);
+        Spinner_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-//        Center_Pod_Servo = _map.get(Servo.class, "centerP-servo");
-//        Right_Pod_Servo = _map.get(Servo.class, "rightP-servo");
-//        Left_Pod_Servo = _map.get(Servo.class, "leftP-servo");
-//
-//        leftEncoder = new Encoder(_map.get(DcMotorEx.class, "leftF_drive"));
-//        rightEncoder = new Encoder(_map.get(DcMotorEx.class, "rightB_drive"));
-//        frontEncoder = new Encoder(_map.get(DcMotorEx.class, "rightF_drive"));
+        Collector_Motor_L.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     protected void configureMotorsDefault() {
@@ -91,8 +76,6 @@ public class HardwareMap {
         FL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        Turret_Rotate_Motor_L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        Turret_Rotate_Motor_R.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     protected void configureMotorsPosition() {
@@ -100,5 +83,8 @@ public class HardwareMap {
         FR_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         BL_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         BR_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        Collector_Motor_R.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Collector_Motor_L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 }

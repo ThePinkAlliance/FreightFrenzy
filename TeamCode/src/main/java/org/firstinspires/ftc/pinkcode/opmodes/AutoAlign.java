@@ -24,7 +24,6 @@ public class AutoAlign extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         drive = new MecanumDrive(hardwareMap);
         vision = new Vision(hardwareMap);
-        utils = new Utils();
 
         vision.activate();
 

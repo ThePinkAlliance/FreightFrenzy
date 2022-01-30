@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -14,6 +15,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import java.util.List;
 
 @TeleOp(name = "Teleop", group = "Teleop")
+@Disabled
 public class Teleop extends OpMode {
     private Base Base;
     private ShippingHubTracker Vision;
@@ -24,7 +26,6 @@ public class Teleop extends OpMode {
     public void init() {
         Base = new Base(hardwareMap);
         Vision = new ShippingHubTracker(hardwareMap);
-        Utils = new Utils();
 
         // Create the new thread and start it in a new process
         // By creating a thread we free up the current thread for other things.

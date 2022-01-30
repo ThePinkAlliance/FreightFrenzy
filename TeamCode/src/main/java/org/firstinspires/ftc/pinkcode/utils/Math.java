@@ -14,6 +14,10 @@ public class Math {
         return height / java.lang.Math.sin(angle);
     }
 
+    public double timeUntilReachedInches(double inches) {
+        return ((2048 * inches) / 14848) * 1000;
+    }
+
     /**
      *
      * @param objectAngle

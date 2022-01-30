@@ -8,6 +8,7 @@ public class OdoemtryPod {
     private boolean isRetracted;
     private int minPosition = 0;
     private int maxPosition = 50;
+
     private Encoder encoder;
     private Servo servo;
 

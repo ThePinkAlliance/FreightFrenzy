@@ -15,18 +15,19 @@ public class Turret extends HardwareMap {
         super(_map);
     }
 
-    public void setCurrentAngle(double angle) {
-        double error = getCurrentAngle() - angle;
+//    public void setCurrentAngle(double angle) {
+//        double error = getCurrentAngle() - angle;
+//
+//        double kp = 2.1;
+//        double kd = 1.5;
+//
+//        double power = (kp * error) - (kd * Turret_Rotate_Motor_L.getCurrentPosition());
+//
+//        Turret_Rotate_Motor_L.setPower(power);
+//        Turret_Rotate_Motor_R.setPower(power);
+//    }
 
-        double kp = 2.1;
-        double kd = 1.5;
-
-        double power = (kp * error) - (kd * Turret_Rotate_Motor_L.getCurrentPosition());
-
-        Turret_Rotate_Motor_L.setPower(power);
-        Turret_Rotate_Motor_R.setPower(power);
-    }
-
+    //sets state of grabber to input state
     public int setGrabberState(GRABBER_STATE newState) {
         this.grabberState = newState;
 
@@ -43,7 +44,7 @@ public class Turret extends HardwareMap {
         }
     }
 
-    public double getCurrentAngle() {
-        return Turret_Rotate_Motor_L.getCurrentPosition();
-    }
+//    public double getCurrentAngle() {
+//        return Turret_Rotate_Motor_L.getCurrentPosition();
+//    }
 }

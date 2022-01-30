@@ -168,7 +168,7 @@ public class MecanumDrive extends com.acmerobotics.roadrunner.drive.MecanumDrive
             setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
         }
 
-        // TODO: reverse any motors using DcMotor.setDirection()
+        // TODO: spinReverse any motors using DcMotor.setDirection()
         // Motors are reversed in PinkHardware
 
         // TODO: if desired, use setLocalizer() to change the localization method

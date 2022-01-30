@@ -20,6 +20,8 @@ public class Collector extends HardwareMap {
 
     private double Collector_Target_Position = 2048;
 
+    private double previousAngleTicks;
+
     // this is the current state for the bottom portion of the collector arm
     private CollectorStates currentState = CollectorStates.COLLECT;
 
@@ -70,15 +72,31 @@ public class Collector extends HardwareMap {
     // moves the motor to a point defined in degrees
     public void setAngle(double angle) {
         int angleTicks = (int) ((Constants.Ticks / 360) * angle);
+        double currentTicks = (Collector_Motor_R.getCurrentPosition() + Collector_Motor_L.getCurrentPosition()) / 2.0;
+        double error = currentTicks - angleTicks;
+        double vel = currentTicks - previousAngleTicks;
+        previousAngleTicks = currentTicks;
 
-        Collector_Motor_L.setTargetPosition(angleTicks);
-        Collector_Motor_R.setTargetPosition(angleTicks);
+        //              kp              kd
+        double power = (2.1 * error) - (1.5 * vel);
+
+        power = Range.clip(power, 0.3, 1);
+
+        Collector_Motor_R.setPower(power);
+        Collector_Motor_L.setPower(power);
     }
 
+    public void setPower(double power) {
+        Collector_Motor_R.setPower(power);
+        Collector_Motor_L.setPower(power);
+    }
+
+    @Deprecated
     public void lockPosition() {
 //        int angleTicks = (int) ((Constants.Ticks / 360) * angle);
         double error = Collector_Motor_R.getCurrentPosition() - Collector_Motor_L.getCurrentPosition();
 
+        //              kp              kd
         double power = (2.1 * error) - (1.5 * Collector_Motor_R.getCurrentPosition());
 
         power = Range.clip(power, 0.3, 1);
@@ -92,6 +110,21 @@ public class Collector extends HardwareMap {
         int currentTicks = _motor.getCurrentPosition();
 
         return ((currentTicks / Constants.Ticks) * 360);
+    }
+
+    public double getCurrentAngle() {
+        double currentTicks = (Collector_Motor_R.getCurrentPosition() + Collector_Motor_L.getCurrentPosition()) / 2.0;
+
+        return ((currentTicks / Constants.Ticks) * 360);
+    }
+
+
+    public double getCollectorPosition() {
+        return Collector_rotate.getPosition();
+    }
+
+    public void setCollectorPosition(double position) {
+        this.Collector_rotate.setPosition(position);
     }
 
     // this will set the state of the collector

@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShippingHubTracker implements Runnable {
+public class MarkerTracker implements Runnable {
     private String[] WANTED_LABELS = {
             "red_shipping"
     };
@@ -22,7 +22,7 @@ public class ShippingHubTracker implements Runnable {
     private HardwareMap _map;
     private WebcamName Webcam;
 
-    public ShippingHubTracker(HardwareMap _map) {
+    public MarkerTracker(HardwareMap _map) {
         this._map = _map;
 
         // initialize all vision systems

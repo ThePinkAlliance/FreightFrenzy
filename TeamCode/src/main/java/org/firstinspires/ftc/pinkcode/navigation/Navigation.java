@@ -87,6 +87,10 @@ public class Navigation extends HardwareMap {
         return (_val <= (_target - _margin) && _val <= (_target + _margin));
     }
 
+    public int getEncodersCounts() {
+        return (FL_Motor.getCurrentPosition() + FR_Motor.getCurrentPosition() + BR_Motor.getCurrentPosition() + BL_Motor.getCurrentPosition()) / 4;
+    }
+
     // Tank drive two wheels to target positions in inches.
     // Returns true when both arrive at the target.
     public boolean driveToPos (double targetPosInches, double targetAngleDeg, double currentBasePosCounts, double currentAngleDeg,

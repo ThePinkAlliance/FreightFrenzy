@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -8,6 +9,7 @@ import org.firstinspires.ftc.pinkcode.subsystems.Collector;
 import org.firstinspires.ftc.pinkcode.subsystems.PizzaSpinner;
 
 @TeleOp(name = "Teleop Clutch", group = "Teleop")
+@Disabled
 public class TeleopClutch extends OpMode {
     private Base Base;
     private Collector Collector;
@@ -37,8 +39,8 @@ public class TeleopClutch extends OpMode {
         this.Base.tank(gamepad1.left_stick_x, gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         // when right bumper is pressed activate pizza spinner
-        this.PizzaSpinner.spin(gamepad2.right_bumper, reduction_pizza_spinner);
-        this.PizzaSpinner.reverse(gamepad1.left_bumper);
+//        this.PizzaSpinner.spin(gamepad2.right_bumper);
+//        this.PizzaSpinner.spinReverse(gamepad1.left_bumper);
 
         this.Collector.drive(-gamepad2.left_stick_y);
 

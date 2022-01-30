@@ -35,7 +35,7 @@ public class Constants {
     }
 
     public interface CollectorGrabberPositions {
-        int REVERSE = -1;
+        double REVERSE = -0.55;
         int OPEN = 1;
     }
 

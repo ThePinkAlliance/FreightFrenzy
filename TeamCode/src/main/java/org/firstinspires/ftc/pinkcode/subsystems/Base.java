@@ -1,22 +1,24 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
+import com.qualcomm.robotcore.util.Range;
+
 import org.firstinspires.ftc.pinkcode.Constants;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 
 /**
  * Motor Type; Gobilda
- * Motor RPS: 5.33
- * Motor RPM: 320
+ * Motor RPS: 7.25
+ * Motor RPM: 435
  */
 
 public class Base extends HardwareMap {
     private double retractTime = 4;
     private boolean inWarehouse = false;
 
-//    public OdoemtryPod centerPod = new OdoemtryPod(this.Center_Pod_Servo, this.frontEncoder);
-//    public OdoemtryPod leftPod = new OdoemtryPod(this.Left_Pod_Servo, this.leftEncoder);
-//    public OdoemtryPod rightPod = new OdoemtryPod(this.Right_Pod_Servo, this.rightEncoder);
+    public OdoemtryPod centerPod = new OdoemtryPod(this.Center_Pod_Servo, this.frontEncoder);
+    public OdoemtryPod leftPod = new OdoemtryPod(this.Left_Pod_Servo, this.leftEncoder);
+    public OdoemtryPod rightPod = new OdoemtryPod(this.Right_Pod_Servo, this.rightEncoder);
 
     public Base(com.qualcomm.robotcore.hardware.HardwareMap _map) {
         super(_map);
@@ -35,35 +37,34 @@ public class Base extends HardwareMap {
     // depending on the speed of the servos we can wait until the z axis on the imu bumps up...
     // and the distance to the barrier is very small we can retract and leave them retracted until exiting, for exiting the warehouse...
     // if imu z axis bumps up again and is close to the barrier we can lower the pods and reset roadrunners position
-    @Deprecated
     public void needToRetract() {
-        double distance = this.frontLeftDistance.getDistance(DistanceUnit.INCH);
+//        double distance = this.frontLeftDistance.getDistance(DistanceUnit.INCH);
 
         Velocity vel = this.imu.getVelocity().toUnit(DistanceUnit.INCH);
 
-        int r = this.frontLeftColor.red();
-        int g = this.frontLeftColor.green();
-        int b = this.frontLeftColor.blue();
+//        int r = this.frontLeftColor.red();
+//        int g = this.frontLeftColor.green();
+//        int b = this.frontLeftColor.blue();
 
         // if the color sensor detects the barriers color return true. also the RGB values are placeholders for now
-        boolean isBarrierColor = r == 3 && g == 5 && b == 1;
+//        boolean isBarrierColor = r == 3 && g == 5 && b == 1;
 
         // if the yVelocity is greater then the xVelocity use the yVelocity
-        if (vel.yVeloc > vel.xVeloc && isBarrierColor) {
-            double secsUntilReached = vel.yVeloc / distance;
+//        if (vel.yVeloc > vel.xVeloc && isBarrierColor) {
+//            double secsUntilReached = vel.yVeloc / distance;
 
             // if seconds until reached barrier retract the odometry pods
-            if (secsUntilReached <= retractTime) {
+//            if (secsUntilReached <= retractTime) {
 //                centerPod.retract();
-            }
-        } else if (vel.xVeloc > vel.yVeloc && isBarrierColor) {
-            double secsUntilReached = vel.xVeloc / distance;
+//            }
+//        } else if (vel.xVeloc > vel.yVeloc && isBarrierColor) {
+//            double secsUntilReached = vel.xVeloc / distance;
 
             // if seconds until reached barrier retract the odometry pods
-            if (secsUntilReached <= retractTime) {
+//            if (secsUntilReached <= retractTime) {
 //                centerPod.retract();
-            }
-        }
+//            }
+//        }
 
     }
 
@@ -91,6 +92,23 @@ public class Base extends HardwareMap {
 
     public double getBasePosCounts(){
         return this.BL_Motor.getCurrentPosition() / Constants.Ticks;
+    }
+
+    public void driveInches(double inches) {
+        int ticks = (int) (inches * 2048);
+
+        FL_Motor.setTargetPosition(ticks);
+        FR_Motor.setTargetPosition(ticks);
+        BR_Motor.setTargetPosition(ticks);
+        BL_Motor.setTargetPosition(ticks);
+    }
+
+    public double getBaseCountRight() {
+        return FR_Motor.getCurrentPosition();
+    }
+
+    public double getBaseCountLeft() {
+        return FL_Motor.getCurrentPosition();
     }
 
     public double getBasePos(){
@@ -153,11 +171,14 @@ public class Base extends HardwareMap {
 
 
     // drive controls for tank drive
-    public void tank(double left, double right) {
-        this.FL_Motor.setPower(left);
-        this.FR_Motor.setPower(right);
-        this.BR_Motor.setPower(right);
-        this.BL_Motor.setPower(left);
+    public void tank(double leftRaw, double rightRaw) {
+        double right = Range.clip(rightRaw, -0.7, 0.7);
+        double left = Range.clip(leftRaw, -0.7, 0.7);
+
+        this.FL_Motor.setPower(-right);
+        this.FR_Motor.setPower(-left);
+        this.BR_Motor.setPower(-left);
+        this.BL_Motor.setPower(-right);
     }
 
     public void driveRaw(double front_left, double front_right, double back_left, double back_right) {
