@@ -10,6 +10,15 @@ public class Constants {
     public static double towerGearCircumference = 4.85;
     public static double towerGearLength = 4.23;
 
+    public static double arm_targetTicks = -2000;
+    public static double arm_kP = 0.2;
+    public static double arm_kI = 0.2;
+    public static double arm_kD = 0.2;
+    public static double arm_kF = 0.2;
+    public static double dt_kP = 0.01;
+    public static double dt_kD = 0.07;
+
+
     public static final String[] LABELS_CUSTOM = {
             "red_shipping",
     };

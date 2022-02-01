@@ -16,10 +16,6 @@ public class Base extends HardwareMap {
     private double retractTime = 4;
     private boolean inWarehouse = false;
 
-    public OdoemtryPod centerPod = new OdoemtryPod(this.Center_Pod_Servo, this.frontEncoder);
-    public OdoemtryPod leftPod = new OdoemtryPod(this.Left_Pod_Servo, this.leftEncoder);
-    public OdoemtryPod rightPod = new OdoemtryPod(this.Right_Pod_Servo, this.rightEncoder);
-
     public Base(com.qualcomm.robotcore.hardware.HardwareMap _map) {
         super(_map);
     }

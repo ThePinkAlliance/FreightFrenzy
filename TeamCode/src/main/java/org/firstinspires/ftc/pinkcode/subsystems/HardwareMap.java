@@ -38,13 +38,11 @@ public class HardwareMap {
         FL_Motor = _map.get(DcMotorEx.class, "leftF");
         BL_Motor = _map.get(DcMotorEx.class, "leftB");
 
-        Collector_Motor_L = _map.get(DcMotor.class, "collect-l");
-        Collector_Motor_R = _map.get(DcMotor.class, "collect-r");
+        Collector_Motor_L = _map.get(DcMotor.class, "tower-l");
+        Collector_Motor_R = _map.get(DcMotor.class, "tower-r");
 
         Collector_Intake_Motor = _map.get(DcMotor.class, "intake");
-
-        Collector_rotate = _map.get(Servo.class, "coll-rot");
-
+        Collector_rotate = _map.get(Servo.class, "col-rot");
         Spinner_Motor = _map.get(DcMotor.class, "pizza");
 
         imu = _map.get(BNO055IMU.class, "imu");
@@ -68,6 +66,7 @@ public class HardwareMap {
 
         Spinner_Motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        Collector_Motor_L.setDirection(DcMotorSimple.Direction.FORWARD);
         Collector_Motor_L.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
@@ -84,7 +83,15 @@ public class HardwareMap {
         BL_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         BR_Motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        BR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        FR_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        BL_Motor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         Collector_Motor_R.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Collector_Motor_L.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        Collector_Motor_R.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Collector_Motor_L.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 }

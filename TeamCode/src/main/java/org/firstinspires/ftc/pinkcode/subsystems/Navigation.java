@@ -2,6 +2,8 @@ package org.firstinspires.ftc.pinkcode.subsystems;
 
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.pinkcode.Constants;
+
 public class Navigation extends HardwareMap {
     final double COUNTS_PER_INCH = 2048; // Counts Previous 49.8
     final double POSITION_THRESHOLD = 1.0;   // Base travel
@@ -27,13 +29,13 @@ public class Navigation extends HardwareMap {
 
         linearError = targetPosInches - currentPosInches;
         double angularError = targetAngleDeg - currentAngleDeg;
-        double motorCmd = PD.getMotorCmd(0.02, 0.07, linearError, linearSpeedInches);
+        double motorCmd = PD.getMotorCmd(Constants.dt_kP, Constants.dt_kD, linearError, linearSpeedInches);
 
         // Determine the baseline motor speed command, but limit it to leave room for the turn offset
         if(maxPower == -999) {
-            motorCmd = Range.clip(motorCmd, -0.6, 0.6);
+            motorCmd = Range.clip(motorCmd, -0.6, 1);
         } else {
-            motorCmd = Range.clip(motorCmd, -0.6, 0.6);
+            motorCmd = Range.clip(motorCmd, -0.6, 1);
             motorCmd = Range.clip(motorCmd, -maxPower, maxPower);
         }
 

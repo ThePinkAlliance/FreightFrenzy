@@ -112,6 +112,15 @@ public class Collector extends HardwareMap {
         return ((currentTicks / Constants.Ticks) * 360);
     }
 
+    public double getCurrentTicks() {
+        return (Collector_Motor_R.getCurrentPosition() + Collector_Motor_L.getCurrentPosition()) / 2.0;
+    }
+
+    public void setPosition(int pos) {
+        this.Collector_Motor_L.setTargetPosition(pos);
+        this.Collector_Motor_R.setTargetPosition(pos);
+    }
+
     public double getCurrentAngle() {
         double currentTicks = (Collector_Motor_R.getCurrentPosition() + Collector_Motor_L.getCurrentPosition()) / 2.0;
 
@@ -121,6 +130,14 @@ public class Collector extends HardwareMap {
 
     public double getCollectorPosition() {
         return Collector_rotate.getPosition();
+    }
+
+    public double getTargetPosition() {
+        return this.Collector_Target_Position;
+    }
+
+    public void setTargetPosition(double position) {
+        this.Collector_Target_Position = position;
     }
 
     public void setCollectorPosition(double position) {
