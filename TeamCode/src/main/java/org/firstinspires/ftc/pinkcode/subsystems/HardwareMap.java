@@ -22,11 +22,9 @@ public class HardwareMap {
 
     protected Encoder leftEncoder, rightEncoder, frontEncoder;
 
-    protected Servo Grabber_Rotate_L, Grabber_Rotate_R, Grabber_Motion;
+    protected Servo Intake_Lock;
 
     protected Servo Collector_rotate;
-
-    protected Servo Left_Pod_Servo, Right_Pod_Servo, Center_Pod_Servo;
 
     protected DcMotor Collector_Intake_Motor;
 
@@ -43,6 +41,9 @@ public class HardwareMap {
 
         Collector_Intake_Motor = _map.get(DcMotor.class, "intake");
         Collector_rotate = _map.get(Servo.class, "col-rot");
+
+        Intake_Lock = _map.get(Servo.class, "lock");
+
         Spinner_Motor = _map.get(DcMotor.class, "pizza");
 
         imu = _map.get(BNO055IMU.class, "imu");
@@ -68,6 +69,7 @@ public class HardwareMap {
 
         Collector_Motor_L.setDirection(DcMotorSimple.Direction.FORWARD);
         Collector_Motor_L.setDirection(DcMotorSimple.Direction.REVERSE);
+        Collector_Intake_Motor.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
     protected void configureMotorsDefault() {

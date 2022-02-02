@@ -32,11 +32,11 @@ public class Turret extends HardwareMap {
         this.grabberState = newState;
 
         if (newState == GRABBER_STATE.CLOSE) {
-            this.Grabber_Motion.setPosition(Constants.GRABBER_POSITIONS.CLOSE);
+//            this.Grabber_Motion.setPosition(Constants.GRABBER_POSITIONS.CLOSE);
 
             return Constants.GRABBER_POSITIONS.CLOSE;
         } else if (newState == GRABBER_STATE.OPEN) {
-            this.Grabber_Motion.setPosition(Constants.GRABBER_POSITIONS.OPEN);
+//            this.Grabber_Motion.setPosition(Constants.GRABBER_POSITIONS.OPEN);
 
             return Constants.GRABBER_POSITIONS.OPEN;
         } else {

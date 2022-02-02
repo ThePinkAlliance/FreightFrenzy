@@ -6,17 +6,19 @@ import com.acmerobotics.dashboard.config.Config;
 public class Constants {
     public static String vuforiaKey = "AU5HdoL/////AAABmdflEYY1uEgKvLLnXhuUKQEiOh/Swf8w1NP3fjwJ0L5KhNZjEBmtqvcb1vRriuL7dxpTimmKsrPxVN0GSemDm1z0zZHiuEDJjN6is0gE5cC8eCf5/w4A9J9xygAQMiK4UOje3lWQjKpyMbqNeKgy1I6PZqyXBae1+6/gecIRmHuDjcqGFcEnRKmf8e6iPrFIdaC53DkmQUxJWRalVEqWsdmwmLm69AsaoG+aL7D0xkupVo7U23C2fdDkl66qsFO7v7jf0ONGEdmNjg1TTEKQmrip86/iMst+I7mdLA/pYsY00EjAjgPJ8YdXEqR5pKR2CK4DNmVU+c2A7T+w+KhGwxJ8us9j9FpYTd1yC0wRQD0R";
     public static double towerGearWidth = 1.543307;
+
     // inches
     public static double towerGearCircumference = 4.85;
     public static double towerGearLength = 4.23;
 
-    public static double arm_targetTicks = -2000;
-    public static double arm_kP = 0.2;
-    public static double arm_kI = 0.2;
-    public static double arm_kD = 0.2;
-    public static double arm_kF = 0.2;
-    public static double dt_kP = 0.01;
-    public static double dt_kD = 0.07;
+    public static double arm_kP = 0.00051;
+    public static double arm_kI = 0.000199;
+    public static double arm_kD = 0.00004;
+    public static double arm_kF = 0.0;
+    public static double dt_kP = 0.060;
+    public static double dt_kD = 0.31;
+
+    public static double DT_ENCODER_COUNTS = 34.6; //25.1327412287;
 
 
     public static final String[] LABELS_CUSTOM = {

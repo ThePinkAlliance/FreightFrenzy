@@ -18,6 +18,13 @@ public class Collector extends HardwareMap {
         STOP
     }
 
+    public enum LOCK_STATES  {
+        CLOSE,
+        OPEN
+    }
+
+    private LOCK_STATES lockState = LOCK_STATES.OPEN;
+
     private double Collector_Target_Position = 2048;
 
     private double previousAngleTicks;
@@ -48,6 +55,18 @@ public class Collector extends HardwareMap {
     public void drive(double power) {
         this.Collector_Motor_L.setPower(power / 2);
         this.Collector_Motor_R.setPower(power / 2);
+    }
+
+    public void setLockState(LOCK_STATES states) {
+        if (states == LOCK_STATES.CLOSE) {
+            this.Intake_Lock.setPosition(0.45);
+        } else if (states == LOCK_STATES.OPEN) {
+            this.Intake_Lock.setPosition(0);
+        }
+    }
+
+    public LOCK_STATES getLockState() {
+        return lockState;
     }
 
     // this will set the state of the arm

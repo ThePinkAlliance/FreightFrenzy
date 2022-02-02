@@ -9,22 +9,31 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.pinkcode.roadrunner.drive.MecanumDrive;
 import org.firstinspires.ftc.pinkcode.subsystems.Base;
+import org.firstinspires.ftc.pinkcode.subsystems.Dashboard;
+import org.firstinspires.ftc.pinkcode.subsystems.Navigation;
 
-@Autonomous(name = "Basic Auto", group = "auto")
+import java.util.HashMap;
+import java.util.Map;
+
+@Autonomous(name = "Encoder Viewer", group = "debug")
 @Disabled
 public class BasicAuto extends LinearOpMode {
-    Base base;
-    MecanumDrive drive;
+    Navigation nav;
+    Dashboard dashboard;
+
+    Map<String, Object> data = new HashMap<>();
 
     @Override
     public void runOpMode() throws InterruptedException {
-        this.base = new Base(hardwareMap);
-        this.drive = new MecanumDrive(hardwareMap);
+        this.nav = new Navigation(hardwareMap);
+        this.dashboard = new Dashboard(hardwareMap);
 
         waitForStart();
 
-        Trajectory one = drive.trajectoryBuilder(new Pose2d(0, 0, Math.toRadians(0))).forward(12).build();
+        while (opModeIsActive()) {
+            data.put("counts", this.nav.getEncodersCounts());
 
-        drive.followTrajectory(one);
+            dashboard.sendData(data);
+        }
     }
 }

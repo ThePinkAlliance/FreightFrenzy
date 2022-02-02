@@ -3,6 +3,7 @@ package org.firstinspires.ftc.pinkcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.pinkcode.Constants;
 import org.firstinspires.ftc.pinkcode.subsystems.Dashboard;
 import org.firstinspires.ftc.pinkcode.subsystems.Navigation;
 import org.firstinspires.ftc.pinkcode.subsystems.PD;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 @Autonomous(name = "Base Auto", group = "auto")
 public class BaseAuto extends LinearOpMode {
-    private int location_one = 36;
+    private double location_one = 10;
     private int location_two = 40;
     private Navigation nav;
     private Dashboard dashboard;
@@ -46,15 +47,15 @@ public class BaseAuto extends LinearOpMode {
             previousCounts = baseCounts;
 
             dashboardData.put("linearSpeed", linearSpeed);
-            dashboardData.put("previousCounts", previousCounts);
+            dashboardData.put("current inches", baseCounts / Constants.DT_ENCODER_COUNTS);
             dashboardData.put("baseCounts", baseCounts);
             dashboardData.put("imu position", imuPosition);
 
             switch (stages) {
                 case START:
-                    dashboardData.put("target ticks", location_one * 2048);
+                    dashboardData.put("target inches", location_one);
 
-                    if (nav.driveToPos(location_one, 0, baseCounts, nav.imu.getPosition().z, linearSpeed, 1)) {
+                    if (nav.driveToPos(location_one, 0, baseCounts, nav.imu.getPosition().z, linearSpeed, .25)) {
                         stages = STAGES.STOP;
                     }
                     break;

@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name = "Spinner Test", group = "teleop")
+@Disabled
 public class spinnerTest extends OpMode {
     DcMotor motor;
 
