@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.pinkcode.Constants;
@@ -8,6 +9,7 @@ import org.firstinspires.ftc.pinkcode.navigation.Navigation;
 import org.firstinspires.ftc.pinkcode.subsystems.Base;
 
 @Autonomous(name = "Auto Custom Nav Right", group = "auto")
+@Disabled
 public class CustomNav_Park_Right extends LinearOpMode {
     Base Base;
     Navigation Navigation;

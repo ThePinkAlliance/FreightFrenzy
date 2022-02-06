@@ -2,6 +2,7 @@ package org.firstinspires.ftc.pinkcode.opmodes;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.pinkcode.subsystems.Base;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 
 @Autonomous(name = "Auto Custom Nav", group = "auto")
+@Disabled
 public class CustomNav extends LinearOpMode {
     Base Base;
     Navigation Navigation;

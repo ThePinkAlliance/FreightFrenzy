@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
+import com.arcrobotics.ftclib.controller.PDController;
+import com.arcrobotics.ftclib.controller.PIDController;
+import com.arcrobotics.ftclib.controller.PIDFController;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.pinkcode.Constants;
@@ -9,6 +12,8 @@ public class Navigation extends HardwareMap {
     final double POSITION_THRESHOLD = 1.0;   // Base travel
     final double ANGLE_THRESHOLD = 4.0;     // Degrees
 
+    PDController anglePID = new PDController(Constants.dt_angle_kP, Constants.dt_angle_kD);
+
     double leftFMotorCmd, rightFMotorCmd, leftBMotorCmd, rightBMotorCmd, linearError;
 
     public Navigation(com.qualcomm.robotcore.hardware.HardwareMap _map) {
@@ -17,6 +22,10 @@ public class Navigation extends HardwareMap {
 
     public int getEncodersCounts() {
         return (FL_Motor.getCurrentPosition() + FR_Motor.getCurrentPosition()) / 2;
+    }
+
+    public void resetEncoders() {
+        configureMotorsPosition();
     }
 
     public boolean driveToPos (double targetPosInches, double targetAngleDeg, double currentBasePosCounts, double currentAngleDeg,
@@ -45,17 +54,23 @@ public class Navigation extends HardwareMap {
         }
 
         // Determine and add the angle offset
-        angleOffset = PD.getMotorCmd(0.02, 0.001, angularError, 0);
+//        angleOffset = PD.getMotorCmd(Constants.dt_angle_kP, Constants.dt_angle_kD, angularError, 0);
+        angleOffset = anglePID.calculate(currentAngleDeg, targetAngleDeg);
+
+        System.out.println(angleOffset);
+        System.out.println(currentAngleDeg);
+        System.out.println(targetAngleDeg);
+
         leftFMotorCmd = motorCmd - angleOffset;
         rightFMotorCmd = motorCmd + angleOffset;
-        leftFMotorCmd = Range.clip(leftFMotorCmd, -1.0, 1.0);
-        rightFMotorCmd = Range.clip(rightFMotorCmd, -1.0, 1.0);
+        leftFMotorCmd = Range.clip(leftFMotorCmd, -maxPower, maxPower);
+        rightFMotorCmd = Range.clip(rightFMotorCmd, -maxPower, maxPower);
 
         // Limit the max motor command for gentle motion
-        if (maxPower == -999) {
-            leftFMotorCmd = Range.clip(leftFMotorCmd, -.25, .25);
-            rightFMotorCmd = Range.clip(rightFMotorCmd, -.25, .25);
-        }
+//        if (maxPower == -999) {
+//            leftFMotorCmd = Range.clip(leftFMotorCmd, -.25, .25);
+//            rightFMotorCmd = Range.clip(rightFMotorCmd, -.25, .25);
+//        }
         leftBMotorCmd = leftFMotorCmd;
         rightBMotorCmd = rightFMotorCmd;
 

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.pinkcode.subsystems;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.pinkcode.ArmConfig;
 import org.firstinspires.ftc.pinkcode.Constants;
 
 public class Collector extends HardwareMap {
@@ -57,11 +58,17 @@ public class Collector extends HardwareMap {
         this.Collector_Motor_R.setPower(power / 2);
     }
 
+    public void setLockState(double position) {
+        this.Intake_Lock.setPosition(position);
+    }
+
     public void setLockState(LOCK_STATES states) {
         if (states == LOCK_STATES.CLOSE) {
-            this.Intake_Lock.setPosition(0.45);
+            this.Intake_Lock.setPosition(ArmConfig.lock_close);
+            this.lockState = LOCK_STATES.CLOSE;
         } else if (states == LOCK_STATES.OPEN) {
-            this.Intake_Lock.setPosition(0);
+            this.Intake_Lock.setPosition(ArmConfig.lock_open);
+            this.lockState = LOCK_STATES.OPEN;
         }
     }
 

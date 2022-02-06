@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.pinkcode.Constants;
@@ -9,6 +10,7 @@ import org.firstinspires.ftc.pinkcode.subsystems.Base;
 import org.firstinspires.ftc.pinkcode.subsystems.PizzaSpinner;
 
 @Autonomous(name = "Auto Custom Nav Spin Left", group = "auto")
+@Disabled
 public class CustomNav_SpinPark_Left extends LinearOpMode {
     Base Base;
     PizzaSpinner PizzaSpinner;

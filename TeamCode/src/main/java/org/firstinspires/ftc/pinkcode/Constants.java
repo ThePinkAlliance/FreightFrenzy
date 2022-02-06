@@ -11,12 +11,20 @@ public class Constants {
     public static double towerGearCircumference = 4.85;
     public static double towerGearLength = 4.23;
 
+    public static double pizzaSpinner = 1;
+
     public static double arm_kP = 0.00051;
     public static double arm_kI = 0.000199;
     public static double arm_kD = 0.00004;
     public static double arm_kF = 0.0;
     public static double dt_kP = 0.060;
     public static double dt_kD = 0.31;
+    public static double dt_angle_kP = 0.00099;
+    public static double dt_angle_kI = 0.00099;
+    public static double dt_angle_kD = 0.31;
+    public static double dt_angle_kF = 0.0;
+
+    public static double PATH_MAX_POWER = 0.25;
 
     public static double DT_ENCODER_COUNTS = 34.6; //25.1327412287;
 

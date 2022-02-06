@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.pinkcode.subsystems;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.hardware.bosch.NaiveAccelerationIntegrator;
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,7 +14,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.pinkcode.roadrunner.util.Encoder;
 
 public class HardwareMap {
-    protected DcMotor Spinner_Motor;
+    protected DcMotorEx Spinner_Motor;
     protected DcMotor FL_Motor;
     protected DcMotor FR_Motor;
     protected DcMotor BL_Motor;
@@ -44,11 +46,16 @@ public class HardwareMap {
 
         Intake_Lock = _map.get(Servo.class, "lock");
 
-        Spinner_Motor = _map.get(DcMotor.class, "pizza");
+        Spinner_Motor = _map.get(DcMotorEx.class, "pizza");
 
         imu = _map.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled = true;
+        parameters.loggingTag = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
         imu.initialize(parameters);
 
         configureMotorsDefault();

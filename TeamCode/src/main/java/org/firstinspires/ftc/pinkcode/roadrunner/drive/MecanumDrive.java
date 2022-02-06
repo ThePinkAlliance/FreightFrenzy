@@ -417,9 +417,4 @@ public class MecanumDrive extends com.acmerobotics.roadrunner.drive.MecanumDrive
     public double getRawExternalHeading() {
         return imu.getAngularOrientation().firstAngle;
     }
-
-
-
-
-
 }

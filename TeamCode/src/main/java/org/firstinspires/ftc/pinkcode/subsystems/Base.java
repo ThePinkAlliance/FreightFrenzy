@@ -171,10 +171,10 @@ public class Base extends HardwareMap {
         double right = Range.clip(rightRaw, -0.7, 0.7);
         double left = Range.clip(leftRaw, -0.7, 0.7);
 
-        this.FL_Motor.setPower(-right);
-        this.FR_Motor.setPower(-left);
-        this.BR_Motor.setPower(-left);
-        this.BL_Motor.setPower(-right);
+        this.FL_Motor.setPower(left);
+        this.FR_Motor.setPower(right);
+        this.BR_Motor.setPower(right);
+        this.BL_Motor.setPower(left);
     }
 
     public void driveRaw(double front_left, double front_right, double back_left, double back_right) {

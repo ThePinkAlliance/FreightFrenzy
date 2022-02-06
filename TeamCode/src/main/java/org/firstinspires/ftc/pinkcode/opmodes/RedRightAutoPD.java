@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -12,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
 //@Autonomous(name = "red right")
+@Disabled
 public class RedRightAutoPD extends OpMode {
     private Base base;
     private Navigation navigation;

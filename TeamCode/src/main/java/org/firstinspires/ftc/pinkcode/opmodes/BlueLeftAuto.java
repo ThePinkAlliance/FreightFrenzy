@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.pinkcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.pinkcode.subsystems.Base;
@@ -8,6 +9,7 @@ import org.firstinspires.ftc.pinkcode.subsystems.PizzaSpinner;
 import org.firstinspires.ftc.pinkcode.utils.Utils;
 
 @Autonomous(name = "blue left")
+@Disabled
 public class BlueLeftAuto extends LinearOpMode {
     private Base base;
     private PizzaSpinner pizzaSpinner;
