@@ -71,6 +71,7 @@ public class AutoDucks extends LinearOpMode {
         Trajectory t = this.tank.trajectoryBuilder(startingPose).forward(31).addDisplacementMarker(() -> {
             currentPosition = 1000;
         }).build();
+
         Trajectory e = this.tank.trajectoryBuilder(t.end()).splineTo(new Vector2d(x1, y1), 0).build();
 
         this.tank.followTrajectory(t);

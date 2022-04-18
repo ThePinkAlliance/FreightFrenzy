@@ -148,6 +148,9 @@ public class TeleopTank extends OpMode {
     }
 
     public double setTicks(double ticks) {
+        /* the reason this worked is because the PID values were so small that is translated perfectly to a motor power range of -1 -> 1
+         * so a better way of translating the PID position to motor power is an equation for it rather then trying to match the PID values
+         */
         return feedforward.calculate(this.collector.getCurrentTicks(), ticks);
     }
 }

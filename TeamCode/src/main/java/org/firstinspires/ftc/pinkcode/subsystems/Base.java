@@ -168,8 +168,8 @@ public class Base extends HardwareMap {
 
     // drive controls for tank drive
     public void tank(double leftRaw, double rightRaw) {
-        double right = Range.clip(rightRaw, -0.7, 0.7);
-        double left = Range.clip(leftRaw, -0.7, 0.7);
+        double right = Range.clip(rightRaw, -1, 1);
+        double left = Range.clip(leftRaw, -1, 1);
 
         this.FL_Motor.setPower(left);
         this.FR_Motor.setPower(right);
